@@ -26,13 +26,13 @@ GPIO.setmode(GPIO.BCM)
 
 # Set mode for each gpio pin
 
-temp_hum_pin = 13
+temp_hum_pin = 17
 
 #GPIO.setup(gpioList2, GPIO.IN)
 
 
 def measure(pin):
-    return Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, pin)
+    return Adafruit_DHT.read(Adafruit_DHT.DHT11, pin)
 
 def set_status(pin,status):
     GPIO.output(pin, status)

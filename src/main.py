@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'salt'
 CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 
-temp_hum_pin = 13
+temp_hum_pin = 17
 
 
 @app.route('/')
