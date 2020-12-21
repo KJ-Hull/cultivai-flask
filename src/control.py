@@ -32,7 +32,7 @@ temp_hum_pin = 13
 
 
 def measure(pin):
-    return Adafruit_DHT.read(Adafruit_DHT.DHT11, pin)
+    return Adafruit_DHT.read_retry(11, pin)
 
 def set_status(pin,status):
     GPIO.output(pin, status)
