@@ -136,8 +136,8 @@
         function get_moisture() {
             console.log("THIS MUST RETURN THE SOIL'S MOISTURE STATUS");
             moisture = JSON.stringify(data.moisture)
-            $.get({{ request.script_root | tojson | safe }} + '/moisture', function (data) {
-                console.log("MOISTURE STATUS", data);
+            $.get({{ request.script_root | tojson | safe }} + '/moisture', function (moisture) {
+                console.log("MOISTURE STATUS", moisture);
                 $('#moisture').html(moisture)
             })
             
