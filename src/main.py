@@ -26,19 +26,15 @@ temp_hum_pin = 15
 def home():
     return render_template('dashboard.html')
 
-@app.route('/status')
+@app.route('/')
 def get_stats():
     humidity = get_humid(temp_hum_pin)
     temperature = get_temp(temp_hum_pin)
-    
-    with open('schedule.json') as f:
-            data = json.load(f)
     response = jsonify(
         humidity=humidity,
         temperature=temperature,
     )  
     response.headers.add('Access-Control-Allow-Origin', '*')
-    #response.body.add(image)
     return response
 
 
