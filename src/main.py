@@ -69,11 +69,8 @@ def get_humidity():
 
 @app.route('/moisture')
 def get_moisture():
-    temp = get_moist(moisture_pin)
-    if temp:
-        moisture = 1
-    else:
-        moisture = 0
+    moisture = get_moist(moisture_pin)
+ 
     return jsonify(
         moisture=moisture
     )
