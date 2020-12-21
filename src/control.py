@@ -48,10 +48,11 @@ def get_status(pin):
 def get_temp(pin):
     timeout = time.time() + 1
     humidity, temperature = measure(pin)
-    if temperature is not None and temperature is not None or time.time() > timeout:
-        break
+    while True
+        if temperature is not None and temperature is not None or time.time() > timeout:
+            break
         
-    temp = round(temperature,2)
+    temp = round(humidity,2)
     return temp
 
 def get_humid(pin):
