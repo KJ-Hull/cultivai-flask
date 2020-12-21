@@ -62,6 +62,8 @@ def get_humid(pin):
         humidity, temperature = measure(pin)
         if humidity is not None and temperature is not None or time.time() > timeout:
             break
+        else:
+            humidity, temperature = measure(pin)
 
     hum = round(humidity,2)
     return hum     
