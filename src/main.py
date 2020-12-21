@@ -71,9 +71,9 @@ def get_humidity():
 def get_moisture():
     temp = get_moist(moisture_pin)
     if temp:
-        moisture = 'Wet'
+        moisture = 1
     else:
-        moisture = 'Not Wet'
+        moisture = 0
     return jsonify(
         moisture=moisture
     )
