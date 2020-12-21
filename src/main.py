@@ -3,7 +3,7 @@ import json
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, jsonify, Response, send_file
 
-from control import set_status, get_status, get_temp, get_humid
+from control import set_status, get_status, get_temp, get_humid, get_moist
 import RPi.GPIO as GPIO
 
 from flask_cors import CORS
@@ -20,6 +20,7 @@ app.config['SECURITY_PASSWORD_SALT'] = 'salt'
 CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 
 temp_hum_pin = 17
+moisture_pin = 22
 
 
 @app.route('/')
@@ -30,9 +31,11 @@ def home():
 def get_stats():
     humidity = get_humid(temp_hum_pin)
     temperature = get_temp(temp_hum_pin)
+    moisture = get_moist(moisture_pin)
     response = jsonify(
         humidity=humidity,
         temperature=temperature,
+        moisture=moisture
     )  
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
@@ -62,6 +65,13 @@ def get_humidity():
     humidity = get_humid(temp_hum_pin)
     return jsonify(
         humidity=humidity
+    )
+
+@app.route('/moisture')
+def get_moisture():
+    moisture = get_moist(moisture_pin)
+    return jsonify(
+        moisture=moisture
     )
 
 

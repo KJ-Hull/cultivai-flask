@@ -73,7 +73,11 @@
 
                                         </span>
                                     </a>
+                                    <a class="list-group-item list-group-item-action ">
+                                        Moisture
+                                        <span id='humidity' class="badge badge-primary badge pull-right">
 
+                                        </span>
                                 </div>
                             </div>
                     </div>
@@ -105,7 +109,8 @@
         get_humidity()
        
         get_temp()
-        
+
+        get_moisture()
 
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
@@ -119,10 +124,19 @@
         }
 
         function get_humidity() {
-            console.log("THIS MUST TOGGLE THE LIGHT");
+            console.log("THIS MUST RETURN THE HUMIDITY");
             $.get( {{ request.script_root|tojson|safe }} + '/humidity', function( data ) {
                 console.log("HUMIDITY STATUS", data);
                 $('#humidity').html(data.humidity)
+            })
+            
+        }
+
+        function get_moisture() {
+            console.log("THIS MUST RETURN THE SOIL'S MOISTURE STATUS");
+            $.get({{ request.script_root | tojson | safe }} + '/moisture', function (data) {
+                console.log("MOISTURE STATUS", data);
+                $('#moisture').html(data.moisture)
             })
             
         }
