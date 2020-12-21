@@ -26,7 +26,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Set mode for each gpio pin
 
-temp_hum_pin = 11
+temp_hum_pin = 17
 
 #GPIO.setup(gpioList2, GPIO.IN)
 
