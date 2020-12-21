@@ -39,7 +39,7 @@
             </a>
 
             <div class=" ">
-                <aclass="text-center">Hello, this is a test for CultivAI's IoT device environment.</a>
+                <a class="text-center">Hello, this is a test for CultivAI's IoT device environment.</a>
             </div>
 
         </div>
@@ -135,9 +135,10 @@
 
         function get_moisture() {
             console.log("THIS MUST RETURN THE SOIL'S MOISTURE STATUS");
+            moisture = JSON.stringify(data.moisture)
             $.get({{ request.script_root | tojson | safe }} + '/moisture', function (data) {
                 console.log("MOISTURE STATUS", data);
-                $('#moisture').html(data.moisture)
+                $('#moisture').html(moisture)
             })
             
         }
