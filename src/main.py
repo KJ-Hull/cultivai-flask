@@ -26,7 +26,7 @@ temp_hum_pin = 15
 def home():
     return render_template('dashboard.html')
 
-@app.route('/')
+@app.route('/status')
 def get_stats():
     humidity = get_humid(temp_hum_pin)
     temperature = get_temp(temp_hum_pin)
@@ -54,9 +54,6 @@ def get_humidity():
 
 
 if __name__ == '__main__':
-    get_stats
-    print(get_temp)
-
     try:
         # try the production run
         app.run(host='0.0.0.0', port=80)
