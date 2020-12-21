@@ -33,7 +33,7 @@ temp_hum_pin = 15
 
 
 def measure(pin):
-    return Adafruit_DHT.read(Adafruit_DHT.DHT22, pin)
+    return Adafruit_DHT.read(Adafruit_DHT.DHT11, pin)
 
 def set_status(pin,status):
     GPIO.output(pin, status)
@@ -53,7 +53,7 @@ def get_temp(pin):
         if temperature is not None and temperature is not None or time.time() > timeout:
             break
         
-    temp = round(float(temperature),2)
+    temp = round(temperature,2)
     return temp
 
 def get_humid(pin):
@@ -63,7 +63,7 @@ def get_humid(pin):
         if temperature is not None and temperature is not None or time.time() > timeout:
             break
 
-    hum = round(float(humidity),2)
+    hum = round(humidity,2)
     return hum     
 
     
