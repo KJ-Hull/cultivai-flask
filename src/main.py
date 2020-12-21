@@ -6,7 +6,6 @@ from flask import Flask, request, flash, url_for, redirect, \
 from control import set_status, get_status, get_temp, get_humid
 import RPi.GPIO as GPIO
 
-from picamera import PiCamera
 from flask_cors import CORS
 import requests
 from datetime import timedelta, datetime
@@ -42,24 +41,11 @@ def get_stats():
     response = jsonify(
         humidity=humidity,
         temperature=temperature,
-        schedule=data,
     )  
     response.headers.add('Access-Control-Allow-Origin', '*')
     #response.body.add(image)
     return response
 
-@app.route('/schedule', methods = ['POST', 'GET'])
-def post_schedule():
-    if request.method == 'POST':
-        req_data = request.get_json()
-        with open('schedule.json', 'w') as outfile:
-            json.dump(req_data, outfile)
-
-        return jsonify(req_data)
-    else:
-        with open('schedule.json') as f:
-            data = json.load(f)
-        return jsonify(data)
 
 @app.route('/temperature')
 def get_temperature():
