@@ -73,8 +73,10 @@ def get_moist(pin):
     while True:
         if measure(pin):
             soil_state = "Wet"
+            break
         else:
             soil_state = "Not Wet"
+            break
     return soil_state
 
     
