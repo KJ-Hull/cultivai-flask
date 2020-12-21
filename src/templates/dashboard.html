@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -40,21 +40,17 @@
 
             <div class=" ">
                 <aclass="text-center">Hello, this a web tool to monitor the plant in your hoog buckets.</a>
-            
             </div>
 
         </div>
         <!-- Sidebar -->
-
     </header>
     <!--Main Navigation-->
 
     <!--Main layout-->
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
-
             <div class="row wow fadeIn">
-
                 <!--Grid column-->
                 <div class="col-md-8 mb-4">
 
@@ -62,52 +58,6 @@
                     <div class="card">
 
                         <!--Card content-->
-                        <div class="card-body">
-                            <div>
-
-                            <!-- <p>COB light</p>
-
-                            
-
-                            <div class="onoffswitch">
-                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div> -->
-
-                            <p onclick="light_on()" role="button" class="btn btn-info badge-primary"> 
-                                COB light on
-                            </p>
-
-                            <p onclick="light_off()" role="button" class="btn btn-info badge-primary"> 
-                                COB light off
-                            </p>
-
-                            </div>
-
-                            <div>
-                            <p role="button" class="btn btn-info badge-primary"  onclick="set_water_on()"> 
-                                Water on
-                            </p>
-
-                            <p role="button" class="btn btn-info badge-primary"  onclick="set_water_off()"> 
-                                    Water off
-                            </p>
-                            </div>
-                            <div>
-                                <p role="button" class="btn btn-info badge-primary"  onclick="set_vent_on()"> 
-                                    Vent on
-                                </p>
-
-                                <p role="button" class="btn btn-info badge-primary"  onclick="set_vent_off()"> 
-                                        Vent off
-                                </p>
-                            </div>
-
-                        </div>
-
                     </div>
                     <!--/.Card-->
                     <p>
@@ -117,18 +67,9 @@
 
                             <!--Card content-->
                             <div class="card-body">
-                                    <p role="button" class="btn btn-info badge-primary"  onclick="snapshot()" > 
-                                            Snapshot
-                                        </p>
-                                        <p role="button" class="btn btn-info badge-primary"  onclick="window.location.reload()" > 
-                                            Refresh
-                                        </p>
-
-                                <!--img id="refresh" src="{{ url_for('snapshot') }}"-->    
+                                       
                             </div>
-    
                         </div>
-
                 </div>
                 
                 <div class="col-md-4 mb-4">
@@ -141,7 +82,6 @@
                             <div class="list-group list-group-flush">
                                     <a class="list-group-item list-group-item-action waves-effect">
                                         Measurements:     
-                                            
                                     </a>
 
                                 <a class="list-group-item list-group-item-action ">
@@ -155,71 +95,12 @@
                                     <span id='humidity' class="badge badge-primary badge pull-right">
                                     </span>
                                 </a>
-                                <!-- <a class="list-group-item list-group-item-action ">
-                                    Soil Moisture
-                                    <span id='water_status' class="badge badge-primary badge pull-right"></span>
-                                </a> -->
                                 
                             </div>
-                            <!-- List group links -->
                         </div>
-
-                        
                     </div> 
-
-                    <div class="card mb-4">
-
-                            <!--Card content-->
-                            <div class="card-body">
-    
-                                <!-- List group links -->
-                                <div class="list-group list-group-flush">
-                                    
-                                    <a class="list-group-item  ">
-                                        <p>Grow Schedule:</p>
-                                        
-                                        <a class="list-group-item list-group-item-action ">
-                                            COB light off
-                                            <span id='schedule_COB_hour_on' class="badge badge-primary badge pull-right">:00   
-                                        </a>
-
-                                        <a class="list-group-item list-group-item-action ">
-                                            COB light off
-                                            <span id='schedule_COB_hour_off' class="badge badge-primary badge pull-right">
-                                                </span>:00    
-                                        </a>
-                                        
-                                        <a class="list-group-item list-group-item-action ">
-                                            Ventilation on 
-                                            <span id='schedule_vent_hour_on' class="badge badge-primary badge pull-right"> :00    
-                                        </a>
-                                        <a class="list-group-item list-group-item-action ">
-                                            Vent hour off
-                                            <span id='schedule_vent_hour_off' class="badge badge-primary badge pull-right"> :00    
-                                        </a>
-                                        
-                                        <a class="list-group-item list-group-item-action ">
-                                            Water on:
-                                            <span id='schedule_water_hour_on' class="badge badge-primary badge pull-right"> :00    
-                                        </a>
-
-                                        <a class="list-group-item list-group-item-action ">
-                                            Water off
-                                            <span id='schedule_water_hour_off' class="badge badge-primary badge pull-right">:01    
-                                        </a>
-  
-                                    </a>
-                                </div>
-                            </div>
-                    </div>
                 </div>
-                <!--Grid column-->
-
             </div>
-
-            <!--Grid column-->
-           
-
         </div>
     </main>
     <!--Main layout-->
@@ -248,7 +129,6 @@
        
         get_temp()
         
-        get_state()
 
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
@@ -258,8 +138,7 @@
             $.get( {{ request.script_root|tojson|safe }} + '/temperature', function( data ) {
                 console.log("TEMP STATUS", data);
                 $('#temperature').html(data.temperature)
-            })
-            
+            })  
         }
 
         function get_humidity() {
@@ -270,30 +149,8 @@
             })
             
         }
-
-      
-
-        function get_water_status() {
-            console.log("THIS MUST TOGGLE THE LIGHT");
-          
-            
-        }
-        function get_water_status() {
-            console.log("THIS MUST TOGGLE THE LIGHT");
-           
-            
-        }
-
-        function snapshot() {
-            console.log("SNAPSHOT");
-            
-            
-        }
     </script>
 
-    
-   
-    
 
 </body>
 
