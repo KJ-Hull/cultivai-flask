@@ -63,6 +63,7 @@ def get_humidity():
 
 
 if __name__ == '__main__':
+    get_stats
     try:
         # try the production run
         app.run(host='0.0.0.0', port=80)
