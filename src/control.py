@@ -72,10 +72,10 @@ def get_moist(pin):
     timeout = time.time() + 1  
     while True:
         if measure(pin):
-            soil_state = True
+            soil_state = "Wet"
             break
         else:
-            soil_state = False
+            soil_state = "Not Wet"
             break
     return soil_state
 
