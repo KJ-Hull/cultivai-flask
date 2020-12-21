@@ -3,6 +3,7 @@ import time
 import subprocess
 import sys, json
 import time
+import math
 
 def install(package):
     subprocess.call([sys.executable, "-m", "pip", "install", package])
@@ -13,8 +14,6 @@ except:
     install('Adafruit-DHT==1.3.4')
     import Adafruit_DHT
  
-
-
 #import logging
 
 #logging.basicConfig(format='%(levelname)s-%(asctime)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,filename='/App/gpio.log')
@@ -54,7 +53,7 @@ def get_temp(pin):
         if temperature is not None and temperature is not None or time.time() > timeout:
             break
         
-    temp = temperature
+    temp = round(temperature,2)
     return temp
 
 def get_humid(pin):
@@ -64,7 +63,7 @@ def get_humid(pin):
         if temperature is not None and temperature is not None or time.time() > timeout:
             break
 
-    hum = humidity
+    hum = round(humidity,2)
     return hum     
 
     
