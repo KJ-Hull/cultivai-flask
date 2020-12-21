@@ -54,7 +54,7 @@ def get_temp(pin):
         if temperature is not None and temperature is not None or time.time() > timeout:
             break
         
-    temp = round(temperature,2)
+    temp = temperature
     return temp
 
 def get_humid(pin):
@@ -64,7 +64,7 @@ def get_humid(pin):
         if temperature is not None and temperature is not None or time.time() > timeout:
             break
 
-    hum = round(humidity,2)
+    hum = humidity
     return hum     
 
     
