@@ -3,7 +3,6 @@ import time
 import subprocess
 import sys, json
 import time
-import math
 
 def install(package):
     subprocess.call([sys.executable, "-m", "pip", "install", package])
@@ -27,7 +26,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Set mode for each gpio pin
 
-temp_hum_pin = 15
+temp_hum_pin = 13
 
 #GPIO.setup(gpioList2, GPIO.IN)
 
