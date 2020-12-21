@@ -37,6 +37,18 @@ def get_stats():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+@app.route('/schedule', methods = ['POST', 'GET'])
+def post_schedule():
+    if request.method == 'POST':
+        req_data = request.get_json()
+        with open('schedule.json', 'w') as outfile:
+            json.dump(req_data, outfile)
+
+        return jsonify(req_data)
+    else:
+        with open('schedule.json') as f:
+            data = json.load(f)
+        return jsonify(data)
 
 @app.route('/temperature')
 def get_temperature():

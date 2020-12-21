@@ -124,17 +124,17 @@
 
         function get_temp() {
             console.log("THIS MUST RETURN THE TEMP");
-            $.get( {{ request.script_root|tojson|safe }} + '/temperature', function( response ) {
-                console.log("TEMP STATUS", response);
-                $('#temperature').html(response.temperature)
+            $.get( {{ request.script_root|tojson|safe }} + '/temperature', function( data ) {
+                console.log("TEMP STATUS", data);
+                $('#temperature').html(data.temperature)
             })  
         }
 
         function get_humidity() {
             console.log("THIS MUST TOGGLE THE LIGHT");
-            $.get( {{ request.script_root|tojson|safe }} + '/humidity', function( response ) {
-                console.log("HUMIDITY STATUS", response);
-                $('#humidity').html(response.humidity)
+            $.get( {{ request.script_root|tojson|safe }} + '/humidity', function( data ) {
+                console.log("HUMIDITY STATUS", data);
+                $('#humidity').html(data.humidity)
             })
             
         }
