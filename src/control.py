@@ -27,14 +27,8 @@ GPIO.setmode(GPIO.BCM)
 # gpioList2 = [14,15]
 
 # Set mode for each gpio pin
-GPIO.setup(14, GPIO.OUT, initial= GPIO.HIGH)
-GPIO.setup(17, GPIO.OUT, initial= GPIO.LOW)
-GPIO.setup(18, GPIO.OUT, initial= GPIO.HIGH)
 
-water_pin = 17
-COB_pin = 18
 temp_hum_pin = 15
-vent_pin = 14
 
 #GPIO.setup(gpioList2, GPIO.IN)
 
@@ -73,28 +67,6 @@ def get_humid(pin):
     hum = round(humidity,2)
     return hum     
 
-def get_hour(pin, state):
-
-    with open('schedule.json') as f:
-        data = json.load(f)
-
-    if pin == water_pin and state == True:
-        return data['water_hour_on']
-    elif pin == water_pin and state == False:
-        return data['water_hour_off']
-    
-    elif pin == COB_pin and state == True:
-        return data['COB_hour_on']
-    elif pin == COB_pin and state == False:
-        return data['COB_hour_off']
-
-    elif pin == vent_pin and state == True:
-        return data['vent_hour_on']
-    elif pin == vent_pin and state == False:
-        return data['vent_hour_off']
-
-    else:
-        return 0
     
 
 
