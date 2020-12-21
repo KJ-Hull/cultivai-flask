@@ -22,11 +22,6 @@ CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 temp_hum_pin = 15
 
 
-lastfile = "static/1.jpg"
-
-server_url = "https://hoog-cluster.herokuapp.com/api/"
-
-
 @app.route('/')
 def home():
     return render_template('dashboard.html')
