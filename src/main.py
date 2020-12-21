@@ -3,7 +3,7 @@ import json
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, jsonify, Response, send_file
 
-from control import set_status, get_status, get_temp, get_humid, get_hour 
+from control import set_status, get_status, get_temp, get_humid
 import RPi.GPIO as GPIO
 
 from picamera import PiCamera
