@@ -137,7 +137,7 @@
             console.log("THIS MUST RETURN THE SOIL'S MOISTURE STATUS");
             $.get({{ request.script_root | tojson | safe }} + '/moisture', function (data) {
                 console.log("MOISTURE STATUS", data);
-                $('#moisture').html(data)
+                $('#moisture').html(data.moisture)
             })
             
         }
