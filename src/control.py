@@ -70,6 +70,7 @@ def get_humid(pin):
 
 def get_moist(pin):
     timeout = time.time() + 1  
+    GPIO.setup(5, GPIO.IN)
     while True:
         moist_pin_state = GPIO.input(pin)
         if moist_pin_state is not None:
