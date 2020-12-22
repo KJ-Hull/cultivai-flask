@@ -77,6 +77,7 @@ def get_moist(pin):
         else:
             soil_state = "Not Wet"
             break
+        print(soil_state)
     return soil_state
 
     
