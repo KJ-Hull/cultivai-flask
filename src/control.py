@@ -71,7 +71,7 @@ def get_humid(pin):
 def get_moist(pin):
     timeout = time.time() + 1  
     while True:
-        if get_status(pin):
+        if GPIO.input(pin):
             soil_state = "Wet"
             break
         else:
