@@ -20,7 +20,7 @@ app.config['SECURITY_PASSWORD_SALT'] = 'salt'
 CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 
 temp_hum_pin = 17
-moisture_pin = 22
+moisture_pin = 5
 
 
 @app.route('/')
