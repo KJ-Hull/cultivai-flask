@@ -25,7 +25,7 @@ GPIO.setmode(GPIO.BCM)
 # gpioList2 = [14,15]
 
 # Set mode for each gpio pin
-GPIO.setup(5, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(5, GPIO.IN)
 temp_hum_pin = 17
 moisture_pin = 5
 #GPIO.setup(gpioList2, GPIO.IN)
