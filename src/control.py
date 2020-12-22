@@ -27,7 +27,7 @@ GPIO.setmode(GPIO.BCM)
 # Set mode for each gpio pin
 
 temp_hum_pin = 17
-moisture_pin = 22
+moisture_pin = 5
 #GPIO.setup(gpioList2, GPIO.IN)
 
 
@@ -71,7 +71,7 @@ def get_humid(pin):
 def get_moist(pin):
     timeout = time.time() + 1  
     while True:
-        if measure(pin):
+        if GPIO.input(pin):
             soil_state = "Wet"
             break
         else:
