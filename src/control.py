@@ -74,10 +74,10 @@ def get_moist(pin):
         moist_pin_state = GPIO.input(pin)
         if moist_pin_state is not None:
             if moist_pin_state:
-                soil_state = "Wet"
+                soil_state = 'Wet'
                 break
             else:
-                soil_state = "Not Wet"
+                soil_state = 'Not Wet'
                 break
     return soil_state
 
