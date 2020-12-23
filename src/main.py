@@ -78,7 +78,7 @@ def get_moisture():
 
 @app.route('/uv')
 def get_uv():
-    moisture = get_uv_light(uv_pin)
+    uv = get_uv_light(uv_pin)
     return jsonify(
         uv=uv
     )
