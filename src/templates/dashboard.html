@@ -154,7 +154,7 @@
             console.log("THIS MUST RETURN THE UV light status");
             $.get({{ request.script_root | tojson | safe }} + '/uv', function (data) {
                 console.log("UV STATUS", data);
-                $('#uv').html(data.moisture)
+                $('#uv').html(data.uv)
             })
             
         }
