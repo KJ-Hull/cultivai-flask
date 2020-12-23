@@ -36,7 +36,7 @@ def get_stats():
     response = jsonify(
         humidity=humidity,
         temperature=temperature,
-        moisture=moisture
+        moisture=moisture,
         uv=uv
     )  
     response.headers.add('Access-Control-Allow-Origin', '*')
