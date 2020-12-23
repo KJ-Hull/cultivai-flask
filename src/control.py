@@ -26,6 +26,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Set mode for each gpio pin
 GPIO.setup(5, GPIO.IN)
+GPIO.setup(16, GPIO.IN)
 temp_hum_pin = 17
 moisture_pin = 5
 #GPIO.setup(gpioList2, GPIO.IN)
@@ -74,12 +75,25 @@ def get_moist(pin):
         moist_pin_state = GPIO.input(pin)
         if moist_pin_state is not None:
             if moist_pin_state:
-                soil_state = 'Wet'
+                soil_state = 'WET'
                 break
             else:
-                soil_state = 'Not Wet'
+                soil_state = 'NOT WET'
                 break
     return soil_state
+
+def get_uv_light(pin):
+    timeout = time.time() + 1  
+    while True:
+        UV_pin_state = GPIO.input(pin)
+        if UV_pin_state is not None:
+            if UV_pin_state:
+                UV_state = 'NO UV PRESENT'
+                break
+            else:
+                UV_state = 'UV PRESENT'
+                break
+    return UV_state
 
     
 

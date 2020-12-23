@@ -3,7 +3,7 @@ import json
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, jsonify, Response, send_file
 
-from control import set_status, get_status, get_temp, get_humid, get_moist
+from control import set_status, get_status, get_temp, get_humid, get_moist, get_uv_light
 import RPi.GPIO as GPIO
 
 from flask_cors import CORS
@@ -21,7 +21,7 @@ CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 
 temp_hum_pin = 17
 moisture_pin = 5
-
+uv_pin = 16
 
 @app.route('/')
 def home():
@@ -32,10 +32,12 @@ def get_stats():
     humidity = get_humid(temp_hum_pin)
     temperature = get_temp(temp_hum_pin)
     moisture = get_moist(moisture_pin)
+    uv = get_uv_light(uv_pin)
     response = jsonify(
         humidity=humidity,
         temperature=temperature,
         moisture=moisture
+        uv=uv
     )  
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
@@ -72,6 +74,13 @@ def get_moisture():
     moisture = get_moist(moisture_pin)
     return jsonify(
         moisture=moisture
+    )
+
+@app.route('/uv')
+def get_uv():
+    moisture = get_uv_light(uv_pin)
+    return jsonify(
+        uv=uv
     )
 
 

@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\static",
+    "\\templates"
   ],
   "SelectedNode": "\\control.py",
   "PreviewInSolutionExplorer": false

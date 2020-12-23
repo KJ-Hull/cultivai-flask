@@ -79,6 +79,12 @@
 
                                         </span>
                                     </a>
+                                    <a class="list-group-item list-group-item-action ">
+                                        UV
+                                        <span id='uv' class="badge badge-primary badge pull-right">
+
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                     </div>
@@ -113,6 +119,8 @@
 
         get_moisture()
 
+        get_uv()
+
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
 
@@ -138,6 +146,15 @@
             $.get({{ request.script_root | tojson | safe }} + '/moisture', function (data) {
                 console.log("MOISTURE STATUS", data);
                 $('#moisture').html(data.moisture)
+            })
+            
+        }
+
+        function get_uv() {
+            console.log("THIS MUST RETURN THE UV light status");
+            $.get({{ request.script_root | tojson | safe }} + '/uv', function (data) {
+                console.log("UV STATUS", data);
+                $('#uv').html(data.moisture)
             })
             
         }
