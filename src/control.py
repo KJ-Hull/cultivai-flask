@@ -88,10 +88,10 @@ def get_uv_light(pin):
         UV_pin_state = GPIO.input(pin)
         if UV_pin_state is not None:
             if UV_pin_state:
-                UV_state = 'NO UV PRESENT'
+                UV_state = 'UV PRESENT'
                 break
             else:
-                UV_state = 'UV PRESENT'
+                UV_state = 'NO UV PRESENT'
                 break
     return UV_state
 
