@@ -60,13 +60,12 @@ def post_schedule():
 def get_temperature():
     temperature = get_temp(temp_hum_pin)
     unit = "Celcius"
-    json_temp = jsonify(
+    return jsonify(
         name = "temp",
         temperature=temperature,
         unit=unit
     )
-    print(json_temp)
-    return json_temp
+    
 
 @app.route('/humidity')
 def get_humidity():
