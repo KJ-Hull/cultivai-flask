@@ -61,9 +61,9 @@ def get_temperature():
     temperature = get_temp(temp_hum_pin)
     unit = "Celcius"
     return jsonify(
-        #name = "temp",
+        name = "temp",
         temperature=temperature,
-        #unit=unit
+        unit=unit
     )
     
 
