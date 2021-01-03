@@ -65,6 +65,7 @@ def get_temperature():
         temperature=temperature,
         unit=unit
     )
+    print(json_temp)
     return json_temp
 
 @app.route('/humidity')
