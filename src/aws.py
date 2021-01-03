@@ -24,7 +24,7 @@ def check_bucket(bucket_name):
 def create_bucket(bucket_name, s3_connection):
     error_code = 0
     bucket_response, error_code = check_bucket(bucket_name)
-    print(error_code)
+    print(bucket_response)
     if bucket_response:
         if error_code != 0:
             session = boto3.session.Session()
