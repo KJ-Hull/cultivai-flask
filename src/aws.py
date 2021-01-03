@@ -42,7 +42,7 @@ def create_json_file(device_id, name, name_json):
     t = int(time.time())
     file_name = str(t) + '.json'
   
-    temp_array = '{"device_id":"device_id", "name":"name", "variable":"name"}'
+    temp_array = '{"device_id":str(device_id), "name":name, "variable":name}'
     
     temp_b = json.loads(name_json.data)
    
