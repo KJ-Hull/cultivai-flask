@@ -24,7 +24,6 @@ def check_bucket(bucket_name):
 def create_bucket(bucket_name, s3_connection):
     error_code = 0
     bucket_response, error_code = check_bucket(bucket_name)
-    print(bucket_response)
     if bucket_response:
         if error_code != 0:
             session = boto3.session.Session()
@@ -34,10 +33,10 @@ def create_bucket(bucket_name, s3_connection):
                 CreateBucketConfiguration={
                 'LocationConstraint': current_region})
             print(bucket_name, current_region)
-            return bucket_name, bucket_response
+            return bucket_response
     else:
         print("Bucket already exists")
-        return "", 0
+        return 0
 
 def create_json_file(device_id, name, name_json):
     t = int(time.time())
@@ -69,7 +68,7 @@ def upload_file(device_id, name, name_json):
         return False
 
 def s3_aws_init(device_id, name, name_json):
-    bucket_name_response, bucket_response = create_bucket(bucket_name, s3_resource)
+    bucket_response = create_bucket(bucket_name, s3_resource)
 
     if bucket_response == 0:
         upload_file(device_id, name, name_json)
