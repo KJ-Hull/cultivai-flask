@@ -1,5 +1,5 @@
 import json
-from aws import check_bucket, create_bucket
+from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, jsonify, Response, send_file
@@ -61,6 +61,7 @@ def get_temperature():
     temperature = get_temp(temp_hum_pin)
     unit = "Celcius"
     json_temp = jsonify(
+        name = "temp",
         temperature=temperature,
         unit=unit
     )
@@ -71,6 +72,7 @@ def get_humidity():
     humidity = get_humid(temp_hum_pin)
     unit = "%"
     json_humid= jsonify(
+        name = "humid",
         humidity=humidity,
         unit=unit
     )
@@ -80,6 +82,7 @@ def get_humidity():
 def get_moisture():
     moisture = get_moist(moisture_pin)
     json_moist= jsonify(
+        name = "moist",
         moisture=moisture
     )
     return json_moist
@@ -88,9 +91,13 @@ def get_moisture():
 def get_uv():
     uv = get_uv_light(uv_pin)
     json_uv= jsonify(
+        name = "uv",
         uv=uv
     )
     return json_uv
+
+s3_aws_init(209, temp, get_temp())
+
 
 
 if __name__ == '__main__':
