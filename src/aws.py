@@ -24,6 +24,7 @@ def check_bucket(bucket_name):
 def create_bucket(bucket_name, s3_connection):
     error_code = 0
     bucket_response, error_code = check_bucket(bucket_name)
+    print(error_code)
     if bucket_response:
         if error_code != 0:
             session = boto3.session.Session()
@@ -59,7 +60,7 @@ def create_json_file(device_id, name, name_json):
 def upload_file(device_id, name, name_json):
     response, file_name = create_json_file(device_id, name, name_json)
     if response:
-        s3_resource.meta.client.upload_file(Filename=file_name, Bucket=bucket_name, Key=file_name)
+        s3_resource.Object(bucket_name, file_name_.upload_file(Filename=file_name))
         print('file uploaded')
         return True
     else:
