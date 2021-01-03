@@ -61,7 +61,7 @@ def upload_file(device_id, name, name_json):
     response, file_name = create_json_file(device_id, name, name_json)
     print(file_name)
     if response:
-        s3_resource.Object(bucket_name, file_name_.upload_file(Filename=file_name))
+        s3_resource.Object(bucket_name, file_name).upload_file(Filename=file_name))
         print('file uploaded')
         return True
     else:
