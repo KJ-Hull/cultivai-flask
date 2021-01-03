@@ -96,7 +96,7 @@ def get_uv():
     )
     return json_uv
 
-s3_aws_init(209, "temp", get_temp())
+s3_aws_init(209, "temp", get_temperature())
 
 
 if __name__ == '__main__':
