@@ -38,22 +38,17 @@ def create_bucket(bucket_name, s3_connection):
             print("Bucket already exists")
             return 0
 
+
 def create_json_file(device_id, name, name_json):
     t = int(time.time())
     file_name = str(t) + '.json'
   
-    temp_array = jsonify(
-        device_id = device_id,
-        name=name,
-        variable=name
-        )
     
     temp_b = json.loads(name_json.data)
    
-    temp_dict = {**json.loads(temp_array), **temp_b}
-    print(temp_dict)
+    print(temp_b)
     with open(file_name, 'w') as outfile:
-        json.dump(temp_dict, outfile)
+        json.dump(temp_b, outfile)
 
     if path.exists(file_name):
         return True, file_name

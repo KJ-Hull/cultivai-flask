@@ -23,7 +23,7 @@ CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
-
+device_id = 209
 @app.route('/')
 def home():
     return render_template('dashboard.html')
@@ -61,7 +61,9 @@ def get_temperature():
     temperature = get_temp(temp_hum_pin)
     unit = "Celcius"
     return jsonify(
+        device_id = device_id,
         name = "temp",
+        variable=name,
         temperature=temperature,
         unit=unit
     )
