@@ -74,28 +74,34 @@ def get_temperature():
 def get_humidity():
     humidity = get_humid(temp_hum_pin)
     unit = "%"
+    name = "humid"
     return jsonify(
-        name = "humid",
+        name = name,
         humidity=humidity,
-        unit=unit
+        unit=unit,
+        variable=name
     )
     
 
 @app.route('/moisture')
 def get_moisture():
     moisture = get_moist(moisture_pin)
+    name = "moist"
     return jsonify(
-        name = "moist",
-        moisture=moisture
+        name = name,
+        moisture=moisture,
+        variable=name
     )
     
 
 @app.route('/uv')
 def get_uv():
     uv = get_uv_light(uv_pin)
+    name = uv
     return jsonify(
-        name = "uv",
-        uv=uv
+        name = name,
+        uv=uv,
+        variable=name
     )
     
 
