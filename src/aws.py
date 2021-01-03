@@ -10,7 +10,7 @@ bucket_name = 'cultivai-test-bucket'
 
 def check_bucket(bucket_name):
     try:
-        s3.meta.client.head_bucket(Bucket=bucket_name)
+        s3_resource.meta.client.head_bucket(Bucket=bucket_name)
         return True, error_code
     except botocore.exceptions.ClientError as e:
         error_code = int(e.response['Error']['Code'])
