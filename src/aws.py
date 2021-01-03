@@ -22,6 +22,7 @@ def check_bucket(bucket_name):
             return False, error_code
 
 def create_bucket(bucket_name, s3_connection):
+    error_code = 0
     bucket_response, error_code = check_bucket(bucket_name)
     if bucket_response:
         if error_code != 0:
