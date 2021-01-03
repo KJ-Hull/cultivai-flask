@@ -13,24 +13,15 @@ except:
     install('Adafruit-DHT==1.3.4')
     import Adafruit_DHT
  
-#import logging
-
-#logging.basicConfig(format='%(levelname)s-%(asctime)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,filename='/App/gpio.log')
 
 # Set GPIO mode: GPIO.BCM or GPIO.BOARD
 GPIO.setmode(GPIO.BCM) 
-
-# GPIO pins list based on GPIO.BOARD
-# gpioList1 = [17,18]
-# gpioList2 = [14,15]
 
 # Set mode for each gpio pin
 GPIO.setup(5, GPIO.IN)
 GPIO.setup(16, GPIO.IN)
 temp_hum_pin = 17
 moisture_pin = 5
-#GPIO.setup(gpioList2, GPIO.IN)
-
 
 def measure(pin):
     return Adafruit_DHT.read(Adafruit_DHT.DHT11, pin)

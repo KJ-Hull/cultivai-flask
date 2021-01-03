@@ -1,5 +1,5 @@
 import json
-#from aws import check_bucket,
+from aws import check_bucket, create_bucket
 
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, jsonify, Response, send_file
@@ -11,7 +11,7 @@ from flask_cors import CORS
 import requests
 from datetime import timedelta, datetime
 
-#camera = PiCamera()
+
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
@@ -59,30 +59,38 @@ def post_schedule():
 @app.route('/temperature')
 def get_temperature():
     temperature = get_temp(temp_hum_pin)
-    return jsonify(
-        temperature=temperature
+    unit = "Celcius"
+    json_temp = jsonify(
+        temperature=temperature,
+        unit=unit
     )
+    return json_temp
 
 @app.route('/humidity')
 def get_humidity():
     humidity = get_humid(temp_hum_pin)
-    return jsonify(
-        humidity=humidity
+    unit = "%"
+    json_humid= jsonify(
+        humidity=humidity,
+        unit=unit
     )
+    return json_humid
 
 @app.route('/moisture')
 def get_moisture():
     moisture = get_moist(moisture_pin)
-    return jsonify(
+    json_moist= jsonify(
         moisture=moisture
     )
+    return json_moist
 
 @app.route('/uv')
 def get_uv():
     uv = get_uv_light(uv_pin)
-    return jsonify(
+    json_uv= jsonify(
         uv=uv
     )
+    return json_uv
 
 
 if __name__ == '__main__':
