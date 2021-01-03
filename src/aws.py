@@ -56,6 +56,7 @@ def create_json_file(device_id, name, name_json):
         return False, ""
 
 def upload_file(device_id, name, name_json):
+    file_name = ''
     response, file_name = create_json_file(device_id, name, name_json)
     if response:
         s3_resource.Object(bucket_name, file_name_.upload_file(Filename=file_name))
