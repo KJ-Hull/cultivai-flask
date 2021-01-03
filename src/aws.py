@@ -45,9 +45,9 @@ def create_json_file(device_id, name, name_json):
     temp_array = '{"device_id":"device_id", "name":"name", "variable":"name"}'
     
     temp_b = json.loads(name_json.data)
-    print(temp_b)
+   
     temp_dict = {**json.loads(temp_array), **temp_b}
-
+    print(temp_dict)
     with open(file_name, 'w') as outfile:
         json.dump(temp_dict, outfile)
 
