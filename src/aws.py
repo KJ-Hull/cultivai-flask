@@ -35,8 +35,9 @@ def create_bucket(bucket_name, s3_connection):
                 'LocationConstraint': current_region})
             print(bucket_name, current_region)
             return bucket_name, bucket_response
-        else:
-            return "error:", "404"
+    else:
+        print("Bucket already exists")
+        return "", 0
 
 def create_json_file(device_id, name, name_json):
     t = int(time.time())
@@ -55,7 +56,7 @@ def create_json_file(device_id, name, name_json):
     if path.exists(file_name):
         return True, file_name
     else:
-        return False
+        return False, ""
 
 def upload_file(device_id, name, name_json):
     response, file_name = create_json_file(device_id, name, name_json)
@@ -70,10 +71,10 @@ def upload_file(device_id, name, name_json):
 def s3_aws_init(device_id, name, name_json):
     bucket_name_response, bucket_response = create_bucket(bucket_name, s3_resource)
 
-    if bucket_name_response == "error:" or bucket_response == "404":
-        print("Initialisation error. Please try again.")
-    else:
+    if bucket_response == 0:
         upload_file(device_id, name, name_json)
+    else:
+        print("Initialisation error. Please try again.")
 
     
     
