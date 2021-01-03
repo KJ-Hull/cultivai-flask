@@ -34,9 +34,9 @@ def create_bucket(bucket_name, s3_connection):
                 'LocationConstraint': current_region})
             print(bucket_name, current_region)
             return bucket_response
-    else:
-        print("Bucket already exists")
-        return 0
+        else:
+            print("Bucket already exists")
+            return 0
 
 def create_json_file(device_id, name, name_json):
     t = int(time.time())
