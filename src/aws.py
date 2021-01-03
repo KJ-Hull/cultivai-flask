@@ -18,11 +18,11 @@ def check_bucket(bucket_name, error_code):
             print("Bucket Does Not Exist!")
             return False
 
-def create_bucket_name
-error_code = 0
+#def create_bucket_name:
+#error_code = 0
 
-if check_bucket(bucket_name, error_code):
-    if error_code != 0:
-        create_bucket(bucket_name)
+#if check_bucket(bucket_name, error_code):
+ #   if error_code != 0:
+ #       create_bucket(bucket_name)
 
 
