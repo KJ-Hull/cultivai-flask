@@ -61,9 +61,9 @@ def get_temperature():
     temperature = get_temp(temp_hum_pin)
     unit = "Celcius"
     return jsonify(
-        name = "temp",
+        #name = "temp",
         temperature=temperature,
-        unit=unit
+        #unit=unit
     )
     
 
@@ -71,30 +71,30 @@ def get_temperature():
 def get_humidity():
     humidity = get_humid(temp_hum_pin)
     unit = "%"
-    json_humid= jsonify(
+    return jsonify(
         name = "humid",
         humidity=humidity,
         unit=unit
     )
-    return json_humid
+    
 
 @app.route('/moisture')
 def get_moisture():
     moisture = get_moist(moisture_pin)
-    json_moist= jsonify(
+    return jsonify(
         name = "moist",
         moisture=moisture
     )
-    return json_moist
+    
 
 @app.route('/uv')
 def get_uv():
     uv = get_uv_light(uv_pin)
-    json_uv= jsonify(
+    return jsonify(
         name = "uv",
         uv=uv
     )
-    return json_uv
+    
 
 with app.test_request_context():
     s3_aws_init(209, "temp", get_temperature())
