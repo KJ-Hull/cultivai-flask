@@ -41,7 +41,7 @@ def create_bucket(bucket_name, s3_connection):
 def create_json_file(device_id, name, name_json):
     t = int(time.time())
     file_name = str(t) + '.json'
-    print(file_name)
+  
     temp_array = '{"device_id":"device_id", "name":"name", "variable":"name"}'
     
     temp_b = json.loads(name_json.data)
@@ -59,6 +59,7 @@ def create_json_file(device_id, name, name_json):
 def upload_file(device_id, name, name_json):
     file_name = ''
     response, file_name = create_json_file(device_id, name, name_json)
+    print(file_name)
     if response:
         s3_resource.Object(bucket_name, file_name_.upload_file(Filename=file_name))
         print('file uploaded')
