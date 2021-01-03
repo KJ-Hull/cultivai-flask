@@ -8,21 +8,22 @@ s3_resource = boto3.resource('s3')
 
 bucket_name = 'cultivai-test-bucket'
 
-def check_bucket(bucket_name, error_code):
+def check_bucket(bucket_name):
     try:
         s3.meta.client.head_bucket(Bucket=bucket_name)
-        return True
+        return True, error_code
     except botocore.exceptions.ClientError as e:
         error_code = int(e.response['Error']['Code'])
         if error_code == 403:
             print("Private Bucket. Forbidden Access!")
-            return True
+            return True, error_code
         elif error_code == 404:
             print("Bucket Does Not Exist!")
-            return False
+            return False, error_code
 
 def create_bucket(bucket_name, s3_connection):
-    if check_bucket(bucket_name, error_code):
+    bucket_response, error_code = check_bucket(bucket_name)
+    if bucket_response:
         if error_code != 0:
             session = boto3.session.Session()
             current_region = session.region_name
