@@ -96,7 +96,7 @@ def get_uv():
     )
     return json_uv
 
-with app.app_context():
+with app.test_request_context():
     s3_aws_init(209, "temp", get_temperature())
 
 
