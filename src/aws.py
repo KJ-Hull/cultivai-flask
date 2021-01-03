@@ -43,7 +43,7 @@ def create_json_file(device_id, name, name_json):
     file_name = str(t) + '.json'
     temp_array = '{"device_id":"device_id", "name":"name", "variable":"name"}'
 
-    temp_b = json.loads(name_json)
+    temp_b = str(json.loads(name_json))
     temp_c = dict(temp_array.items() + temp_b.items())
 
     json_file = jsonify(temp_c)
