@@ -60,9 +60,10 @@ def post_schedule():
 def get_temperature():
     temperature = get_temp(temp_hum_pin)
     unit = "Celcius"
+    name = "temp"
     return jsonify(
         device_id = device_id,
-        name = "temp",
+        name = name,
         variable=name,
         temperature=temperature,
         unit=unit
