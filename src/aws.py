@@ -4,7 +4,6 @@ import time
 import json
 import os.path
 from os import path
-from main import get_temperature, get_humidity, get_moisture, get_uv
 s3_resource = boto3.resource('s3')
 
 bucket_name = 'cultivai-test-bucket'
