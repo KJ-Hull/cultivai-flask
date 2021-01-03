@@ -41,6 +41,7 @@ def create_bucket(bucket_name, s3_connection):
 def create_json_file(device_id, name, name_json):
     t = int(time.time())
     file_name = str(t) + '.json'
+    print(file_name)
     temp_array = '{"device_id":"device_id", "name":"name", "variable":"name"}'
     
     temp_b = json.loads(name_json.data)
