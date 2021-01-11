@@ -6,7 +6,7 @@ import os.path
 from os import path
 s3_resource = boto3.resource('s3')
 
-bucket_name = 'cultivtest-bucket'
+bucket_name = 'cultivtest-bucket2'
 
 def check_bucket(bucket_name):
     try:
@@ -43,11 +43,7 @@ def create_bucket(bucket_name, s3_connection):
 def create_json_file(device_id, name, name_json):
     t = int(time.time())
     file_name = str(t) + '.json'
-  
-    
     temp_b = json.loads(name_json.data)
-   
-    print(temp_b)
     with open(file_name, 'w') as outfile:
         json.dump(temp_b, outfile)
 
@@ -74,8 +70,8 @@ def s3_aws_init(device_id, name, name_json):
     if bucket_response == 0:
         upload_file(device_id, name, name_json)
     else:
-        print("Initialisation error. Please try again.")
-
+        print("Bucket Created. File will be uploaded for first time.")
+        upload_file(device_id, name, name_json)
     
     
 
