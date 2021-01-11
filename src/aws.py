@@ -24,6 +24,7 @@ def check_bucket(bucket_name):
 def create_bucket(bucket_name, s3_connection):
     error_code = 0
     bucket_response, error_code = check_bucket(bucket_name)
+    print(error_code)
     if bucket_response:
         if error_code != 0:
             session = boto3.session.Session()
@@ -32,7 +33,7 @@ def create_bucket(bucket_name, s3_connection):
                 Bucket=bucket_name,
                 CreateBucketConfiguration={
                 'LocationConstraint': current_region})
-            print(bucket_name, current_region)
+            
             return bucket_response
         else:
             print("Bucket already exists")
