@@ -16,10 +16,10 @@ def check_bucket(bucket_name):
         error_code = int(e.response['Error']['Code'])
         if error_code == 403:
             print("Private Bucket. Forbidden Access!")
-            return True, error_code
+            return False, error_code
         elif error_code == 404:
             print("Bucket Does Not Exist!")
-            return False, error_code
+            return True, error_code
 
 def create_bucket(bucket_name, s3_connection):
     error_code = 0
