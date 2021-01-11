@@ -6,7 +6,7 @@ import os.path
 from os import path
 s3_resource = boto3.resource('s3')
 
-bucket_name = 'cultivtest_bucket'
+bucket_name = 'cultivtest-bucket'
 
 def check_bucket(bucket_name):
     try:
