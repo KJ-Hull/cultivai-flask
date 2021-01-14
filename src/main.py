@@ -122,7 +122,6 @@ def uplink_callback(msg, client):
 
 app_client = ttn.ApplicationClient(app_id, access_key)
 device = app_client.device(dev_id)
-print(device)
 app_client.register_device(dev_id, device)
 
 handler = ttn.HandlerClient(app_id, access_key)
