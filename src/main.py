@@ -22,7 +22,7 @@ dev_id = "rpitest"
 dev_eui = "00644C3EE7BBCE1E"
 app_eui = "70B3D57ED003B7D4"
 app_key = "800F0166400FB6365775915807094349"
-
+endpoint_test = "https://94c16c2f5bccf564bc36432a5d11708c.m.pipedream.net"
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 app.config['DEBUG'] = False
@@ -145,6 +145,9 @@ params_json = json.dumps(params)
 response = requests.post(endpoint,headers={'Authorization': key}, data = params_json)
 
 data = response.json()
+
+test = requests.post(endpoint2, headers={'Authorization': key}, data = get_temperature())
+data_test = test.json()
 
 if __name__ == '__main__':
     try:
