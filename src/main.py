@@ -17,7 +17,7 @@ import ttn
 
 app_id = "test_kj"
 access_key = "ttn-account-v2.ulvfdlPhaPPTiEbQSJ0uelweBFNVlWUARAJca4sipeU"
-
+dev_id = "rpitest"
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 app.config['DEBUG'] = False
@@ -119,6 +119,9 @@ def get_uv():
 def uplink_callback(msg, client):
   print("Received uplink from ", msg.dev_id)
   print(msg)
+
+app_client = ApplicationClient(app_id, access_key, net_address="", cert_content="", discovery_address="http://eu.thethings.network:8084")
+app_client.register_device(dev_id, app_client.device(dev_id))
 
 handler = ttn.HandlerClient(app_id, access_key)
 
