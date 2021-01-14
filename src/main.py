@@ -146,7 +146,7 @@ response = requests.post(endpoint,headers={'Authorization': key}, data = params_
 
 data = response.json()
 
-test = requests.post(endpoint2, headers={'Authorization': key}, data = get_temperature())
+test = requests.post(endpoint_test, headers={'Authorization': key}, data = get_temperature())
 data_test = test.json()
 
 if __name__ == '__main__':
