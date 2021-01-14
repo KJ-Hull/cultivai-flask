@@ -124,8 +124,8 @@ with app.test_request_context():
     endpoint = "http://eu.thethings.network:8084/applications/test_kj/devices/"
     params = {"lorawan_device": {
                "dev_id": "rpitest_2", 
-               "dev_eui": "00644C3EE7BBCE1E", 
-               "app_key": "800F0166400FB6365775915807094349", 
+               "dev_eui": "004F92F775A407ED", 
+               "app_key": "2022E8E917E385B25A940F1BA301F43F", 
                "app_eui": "70B3D57ED003B7D4",
                "app_id": "test_kj", 
                "activation_constraints": "local", 
