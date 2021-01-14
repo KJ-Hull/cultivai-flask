@@ -146,7 +146,8 @@ with app.test_request_context():
 
     data = response.json()
 
-    test = requests.post(endpoint_test, get_temperature())
+    response_test = get_temperature()
+    test = requests.post(endpoint_test, response_test.data)
     
     print(test)
 
