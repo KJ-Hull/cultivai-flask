@@ -130,7 +130,7 @@ app_client = ttn.ApplicationClient(app_id, access_key)
 device = app_client.device(dev_id)
 app_client.update_device(dev_id, updates)
 print(device)
-app_client.register_device(dev_id, device)
+#app_client.register_device(dev_id, device)
 
 handler = ttn.HandlerClient(app_id, access_key)
 
