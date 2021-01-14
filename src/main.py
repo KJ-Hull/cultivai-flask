@@ -145,7 +145,6 @@ with app.test_request_context():
 
     response = requests.put(endpoint,headers={'Authorization': key}, data = params_json)
 
-    data = response.json()
 
     response_test = get_temperature()
     test = requests.post(endpoint_test, response_test.data)
