@@ -139,7 +139,7 @@ with app.test_request_context():
     params["app_id"] = app_id
     params["app_id"] = app_id
     params["dev_id"] = dev_id
-
+    print(params)
     params_json = json.dumps(params)
 
     response = requests.post(endpoint,headers={'Authorization': key}, data = params_json)
