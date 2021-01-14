@@ -123,22 +123,22 @@ with app.test_request_context():
     key = "Key.{}".format(access_key)
     endpoint = "http://eu.thethings.network:8084/applications/test_kj/devices/rpitest"
     params = {"lorawan_device": {
-               "dev_id": "t", 
-               "dev_eui": "", 
-               "app_key": "", 
-               "app_eui": "",
-               "app_id": "", 
+               "dev_id": "rpitest", 
+               "dev_eui": "00644C3EE7BBCE1E", 
+               "app_key": "800F0166400FB6365775915807094349", 
+               "app_eui": "70B3D57ED003B7D4",
+               "app_id": "test_kj", 
                "activation_constraints": "local", 
                "uses32_bit_f_cnt": True}, 
-             "app_id": "", 
-             "dev_id": ""}
-    params["dev_id"] = dev_id
-    params["dev_eui"] = dev_eui
-    params["app_key"] = app_key
-    params["app_eui"] = app_eui
-    params["app_id"] = app_id
-    params["app_id"] = app_id
-    params["dev_id"] = dev_id
+             "app_id": "test_kj", 
+             "dev_id": "rpitest"}
+   # params["dev_id"] = dev_id
+    #params["dev_eui"] = dev_eui
+    #params["app_key"] = app_key
+    #params["app_eui"] = app_eui
+    #params["app_id"] = app_id
+    #params["app_id"] = app_id
+    #params["dev_id"] = dev_id
     print(params)
     params_json = json.dumps(params)
 
