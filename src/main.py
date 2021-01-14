@@ -18,6 +18,9 @@ import ttn
 app_id = "test_kj"
 access_key = "ttn-account-v2.ulvfdlPhaPPTiEbQSJ0uelweBFNVlWUARAJca4sipeU"
 dev_id = "rpitest"
+dev_eui = "00644C3EE7BBCE1E"
+app_eui = "70B3D57ED003B7D4"
+
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 app.config['DEBUG'] = False
@@ -122,6 +125,8 @@ def uplink_callback(msg, client):
 
 app_client = ttn.ApplicationClient(app_id, access_key)
 device = app_client.device(dev_id)
+device.lorawan_device["app_eui"] = app_eui
+device.lorawan_device["dev_eui"] = dev_eui
 app_client.register_device(dev_id, device)
 
 handler = ttn.HandlerClient(app_id, access_key)
