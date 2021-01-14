@@ -142,7 +142,7 @@ with app.test_request_context():
     print(params)
     params_json = json.dumps(params)
 
-    response = requests.post(endpoint,headers={'Authorization': key}, data = params_json)
+    response = requests.post(endpoint,headers={'Authorization': key}, params = params_json)
 
     data = response.json()
 
