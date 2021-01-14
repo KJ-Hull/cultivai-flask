@@ -116,12 +116,6 @@ def get_uv():
    # s3_aws_init(209, "temp", get_temperature())
 
 
-import time
-import ttn
-
-app_id = "foo"
-access_key = "ttn-account.eiPq8mEeYRL_PNBZsOpPy-O3ABJXYWulODmQGR5PZzg"
-
 def uplink_callback(msg, client):
   print("Received uplink from ", msg.dev_id)
   print(msg)
