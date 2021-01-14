@@ -133,11 +133,11 @@ with app.test_request_context():
              "app_id": "test_kj", 
              "dev_id": "rpitest_2",
              "end_device":"{}"}
-   # params["dev_id"] = dev_id
-    #params["dev_eui"] = dev_eui
-    #params["app_key"] = app_key
-    #params["app_eui"] = app_eui
-    #params["app_id"] = app_id
+   # params["lorawan_device":"dev_id"] = dev_id
+    #params["lorawan_device":"dev_eui"] = dev_eui
+    #params["lorawan_device":"app_key"] = app_key
+    #params["lorawan_device":"app_eui"] = app_eui
+    #params["lorawan_device":"app_id"] = app_id
     #params["app_id"] = app_id
     #params["dev_id"] = dev_id
     print(params)
