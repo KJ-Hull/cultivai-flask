@@ -124,8 +124,8 @@ with app.test_request_context():
     endpoint = "https://console.thethingsnetwork.org/applications/test_kj/devices/register"
     params = {"lorawan_device": {
                "dev_id": "rpitest_2", 
-               "dev_eui": "004F92F775A407ED", 
-               "app_key": "2022E8E917E385B25A940F1BA301F43F", 
+               "dev_eui": "00E8B71CFD8A33DB", 
+               "app_key": "916BE91922789D1402F9125BB8258CAB", 
                "app_eui": "70B3D57ED003B7D4",
                "app_id": "test_kj", 
                "activation_constraints": "local", 
@@ -151,6 +151,25 @@ with app.test_request_context():
     
     print(test)
 
+    def uplink_callback(msg, client):
+      print("Received uplink from ", msg.dev_id)
+      print(msg)
+
+    handler = ttn.HandlerClient(app_id, access_key)
+
+    # using mqtt client
+    mqtt_client = handler.data()
+    mqtt_client.set_uplink_callback(uplink_callback)
+    mqtt_client.connect()
+    time.sleep(60)
+    mqtt_client.close()
+
+    # using application manager client
+    app_client =  handler.application()
+    my_app = app_client.get()
+    print(my_app)
+    my_devices = app_client.devices()
+    print(my_devices)
 if __name__ == '__main__':
     try:
         # try the production run
