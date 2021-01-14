@@ -140,7 +140,7 @@ params["app_id"] = app_id
 params["app_id"] = app_id
 params["dev_id"] = dev_id
 
-params_json = json.dump(params)
+params_json = json.dumps(params)
 
 response = requests.post(endpoint,headers={'Authorization': key}, data = params_json)
 
