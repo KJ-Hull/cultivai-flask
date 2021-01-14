@@ -119,35 +119,35 @@ def get_uv():
 
 #with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
+with app.test_request_context():
+    key = "Key.{}".format(access_key)
+    endpoint = "http://eu.thethings.network:8084/applications/test_kj/devices/"
+    params = {"lorawan_device": {
+               "dev_id": "t", 
+               "dev_eui": "", 
+               "app_key": "", 
+               "app_eui": "",
+               "app_id": "", 
+               "activation_constraints": "local", 
+               "uses32_bit_f_cnt": True}, 
+             "app_id": "", 
+             "dev_id": ""}
+    params["dev_id"] = dev_id
+    params["dev_eui"] = dev_eui
+    params["app_key"] = app_key
+    params["app_eui"] = app_eui
+    params["app_id"] = app_id
+    params["app_id"] = app_id
+    params["dev_id"] = dev_id
 
-key = "Key.{}".format(access_key)
-endpoint = "http://eu.thethings.network:8084/applications/test_kj/devices/"
-params = {"lorawan_device": {
-           "dev_id": "t", 
-           "dev_eui": "", 
-           "app_key": "", 
-           "app_eui": "",
-           "app_id": "", 
-           "activation_constraints": "local", 
-           "uses32_bit_f_cnt": True}, 
-         "app_id": "", 
-         "dev_id": ""}
-params["dev_id"] = dev_id
-params["dev_eui"] = dev_eui
-params["app_key"] = app_key
-params["app_eui"] = app_eui
-params["app_id"] = app_id
-params["app_id"] = app_id
-params["dev_id"] = dev_id
+    params_json = json.dumps(params)
 
-params_json = json.dumps(params)
+    response = requests.post(endpoint,headers={'Authorization': key}, data = params_json)
 
-response = requests.post(endpoint,headers={'Authorization': key}, data = params_json)
+    data = response.json()
 
-data = response.json()
-
-test = requests.post(endpoint_test, headers={'Authorization': key}, data = get_temperature())
-data_test = test.json()
+    test = requests.post(endpoint_test, headers={'Authorization': key}, data = get_temperature())
+    data_test = test.json()
 
 if __name__ == '__main__':
     try:
