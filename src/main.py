@@ -21,7 +21,7 @@ access_key = "ttn-account-v2.ulvfdlPhaPPTiEbQSJ0uelweBFNVlWUARAJca4sipeU"
 dev_id = "rpitest"
 dev_eui = "00644C3EE7BBCE1E"
 app_eui = "70B3D57ED003B7D4"
-app_key = "800F0166400FB6365775915807094349""
+app_key = "800F0166400FB6365775915807094349"
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
