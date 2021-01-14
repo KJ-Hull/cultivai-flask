@@ -1,4 +1,5 @@
 import json
+import requests
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
 from flask import Flask, request, flash, url_for, redirect, \
@@ -20,6 +21,7 @@ access_key = "ttn-account-v2.ulvfdlPhaPPTiEbQSJ0uelweBFNVlWUARAJca4sipeU"
 dev_id = "rpitest"
 dev_eui = "00644C3EE7BBCE1E"
 app_eui = "70B3D57ED003B7D4"
+app_key = "800F0166400FB6365775915807094349""
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
@@ -118,36 +120,31 @@ def get_uv():
 #with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
 
+key = "Key.{}".format(access_key)
+endpoint = "http://eu.thethings.network:8084/applications/test_kj/devices/"
+params = {"lorawan_device": {
+           "dev_id": "t", 
+           "dev_eui": "", 
+           "app_key": "", 
+           "app_eui": "",
+           "app_id": "", 
+           "activation_constraints": "local", 
+           "uses32_bit_f_cnt": True}, 
+         "app_id": "", 
+         "dev_id": ""}
+params["dev_id"] = dev_id
+params["dev_eui"] = dev_eui
+params["app_key"] = app_key
+params["app_eui"] = app_eui
+params["app_id"] = app_id
+params["app_id"] = app_id
+params["dev_id"] = dev_id
 
-def uplink_callback(msg, client):
-  print("Received uplink from ", msg.dev_id)
-  print(msg)
+params_json = json.dump(params)
 
-updates = {"app_eui":"", "dev_eui":""}
-updates["app_eui"] = app_eui
-updates["dev_eui"] = dev_eui
-app_client = ttn.ApplicationClient(app_id, access_key)
-device = app_client.device(dev_id)
-app_client.update_device(dev_id, updates)
-print(device)
-#app_client.register_device(dev_id, device)
+response = requests.post(endpoint,headers={'Authorization': key}, data = params_json)
 
-handler = ttn.HandlerClient(app_id, access_key)
-
-# using mqtt client
-mqtt_client = handler.data()
-mqtt_client.set_uplink_callback(uplink_callback)
-mqtt_client.connect()
-time.sleep(60)
-mqtt_client.close()
-
-# using application manager client
-app_client =  handler.application()
-my_app = app_client.get()
-print(my_app)
-my_devices = app_client.devices()
-print(my_devices)
-
+data = response.json()
 
 if __name__ == '__main__':
     try:
