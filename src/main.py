@@ -121,7 +121,7 @@ def get_uv():
    # s3_aws_init(209, "temp", get_temperature())
 with app.test_request_context():
     key = "Key.{}".format(access_key)
-    endpoint = "http://thethingsnetwork.org/applications/test_kj/devices/rpitest_2"
+    endpoint = "https://console.thethingsnetwork.org/applications/test_kj/devices/rpitest_2"
     params = {"lorawan_device": {
                "dev_id": "rpitest_2", 
                "dev_eui": "004F92F775A407ED", 
