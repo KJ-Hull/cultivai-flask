@@ -123,10 +123,10 @@ def uplink_callback(msg, client):
   print("Received uplink from ", msg.dev_id)
   print(msg)
 
+updates = '{"app_eui":{}, "dev_eui":{}'.format(app_eui=app_eui, dev_eui=dev_eui)
 app_client = ttn.ApplicationClient(app_id, access_key)
 device = app_client.device(dev_id)
-device.lorawan_device["app_eui"] = app_eui
-device.lorawan_device["dev_eui"] = dev_eui
+device.update_device(dev_id, updates)
 app_client.register_device(dev_id, device)
 
 handler = ttn.HandlerClient(app_id, access_key)
