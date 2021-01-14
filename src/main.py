@@ -1,5 +1,5 @@
 import json
-from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
+#from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, jsonify, Response, send_file
@@ -112,9 +112,15 @@ def get_uv():
     )
     
 
-with app.test_request_context():
-    s3_aws_init(209, "temp", get_temperature())
+#with app.test_request_context():
+   # s3_aws_init(209, "temp", get_temperature())
 
+
+import time
+import ttn
+
+app_id = "foo"
+access_key = "ttn-account.eiPq8mEeYRL_PNBZsOpPy-O3ABJXYWulODmQGR5PZzg"
 
 def uplink_callback(msg, client):
   print("Received uplink from ", msg.dev_id)
@@ -135,6 +141,7 @@ my_app = app_client.get()
 print(my_app)
 my_devices = app_client.devices()
 print(my_devices)
+
 
 if __name__ == '__main__':
     try:
