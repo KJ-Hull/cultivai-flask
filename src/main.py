@@ -123,7 +123,7 @@ def uplink_callback(msg, client):
   print("Received uplink from ", msg.dev_id)
   print(msg)
 
-updates = '{"app_eui":{}, "dev_eui":{}'.format(app_eui=app_eui, dev_eui=dev_eui)
+updates = '{"app_eui":{app_eui}, "dev_eui":{dev_eui}}'.format(app_eui=app_eui, dev_eui=dev_eui)
 app_client = ttn.ApplicationClient(app_id, access_key)
 device = app_client.device(dev_id)
 device.update_device(dev_id, updates)
