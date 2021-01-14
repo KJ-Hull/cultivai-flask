@@ -121,7 +121,7 @@ def get_uv():
    # s3_aws_init(209, "temp", get_temperature())
 with app.test_request_context():
     key = "Key.{}".format(access_key)
-    endpoint = "http://eu.thethings.network:8084/applications/test_kj/devices/"
+    endpoint = "http://eu.thethings.network:8084/applications/test_kj/devices/rpitest_2"
     params = {"lorawan_device": {
                "dev_id": "rpitest_2", 
                "dev_eui": "004F92F775A407ED", 
@@ -142,7 +142,7 @@ with app.test_request_context():
     print(params)
     params_json = json.dumps(params)
 
-    response = requests.post(endpoint,headers={'Authorization': key}, params = params_json)
+    response = requests.put(endpoint,headers={'Authorization': key}, params = params_json)
 
     data = response.json()
 
