@@ -11,7 +11,12 @@ from flask_cors import CORS
 import requests
 from datetime import timedelta, datetime
 
+import uuid
+import time
+import ttn
 
+app_id = "test_kj"
+access_key = "ttn-account-v2.ulvfdlPhaPPTiEbQSJ0uelweBFNVlWUARAJca4sipeU"
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
@@ -24,6 +29,8 @@ temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
 device_id = 209
+measurement_id = uuid.uuid4()
+
 @app.route('/')
 def home():
     return render_template('dashboard.html')
@@ -62,11 +69,11 @@ def get_temperature():
     unit = "Celcius"
     name = "temp"
     return jsonify(
+        measurement_id =measurement_id,
         device_id = device_id,
         name = name,
         variable=name,
-        temperature=temperature,
-        unit=unit
+        temperature=temperature
     )
     
 
@@ -108,6 +115,26 @@ def get_uv():
 with app.test_request_context():
     s3_aws_init(209, "temp", get_temperature())
 
+
+def uplink_callback(msg, client):
+  print("Received uplink from ", msg.dev_id)
+  print(msg)
+
+handler = ttn.HandlerClient(app_id, access_key)
+
+# using mqtt client
+mqtt_client = handler.data()
+mqtt_client.set_uplink_callback(uplink_callback)
+mqtt_client.connect()
+time.sleep(60)
+mqtt_client.close()
+
+# using application manager client
+app_client =  handler.application()
+my_app = app_client.get()
+print(my_app)
+my_devices = app_client.devices()
+print(my_devices)
 
 if __name__ == '__main__':
     try:

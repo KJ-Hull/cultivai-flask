@@ -7,6 +7,7 @@ from os import path
 s3_resource = boto3.resource('s3')
 
 bucket_name = 'cultivtest-bucket2'
+file_name = ''
 
 def check_bucket(bucket_name):
     try:
@@ -42,7 +43,7 @@ def create_bucket(bucket_name, s3_connection):
 
 def create_json_file(device_id, name, name_json):
     t = int(time.time())
-    file_name = str(t) + '.json'
+    file_name = device_id + str(t) + '.json'
     temp_b = json.loads(name_json.data)
     with open(file_name, 'w') as outfile:
         json.dump(temp_b, outfile)
@@ -53,9 +54,7 @@ def create_json_file(device_id, name, name_json):
         return False, ""
 
 def upload_file(device_id, name, name_json):
-    file_name = ''
     response, file_name = create_json_file(device_id, name, name_json)
-    print(file_name)
     if response:
         s3_resource.Object(bucket_name, file_name).upload_file(Filename=file_name)
         print('file uploaded')
