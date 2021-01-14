@@ -147,7 +147,7 @@ with app.test_request_context():
     data = response.json()
 
     test = requests.post(endpoint_test, headers={'Authorization': key}, data = get_temperature())
-    data_test = test.json()
+    
 
 if __name__ == '__main__':
     try:
