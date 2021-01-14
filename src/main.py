@@ -120,7 +120,7 @@ def uplink_callback(msg, client):
   print("Received uplink from ", msg.dev_id)
   print(msg)
 
-app_client = ttn.ApplicationClient(app_id, access_key, discovery_address="eu.thethings.network:1904")
+app_client = ttn.ApplicationClient(app_id, access_key)
 app_client.register_device(dev_id, app_client.device(dev_id))
 
 handler = ttn.HandlerClient(app_id, access_key)
