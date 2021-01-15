@@ -27,7 +27,7 @@ temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
 device_id = 209
-measurement_id = uuid.uuid4()
+measurement_id = ""
 
 @app.route('/')
 def home():
@@ -67,7 +67,7 @@ def get_temperature():
     unit = "Celcius"
     name = "temp"
     return jsonify(
-        measurement_id =measurement_id,
+        measurement_id = uuid.uuid4(),
         device_id = device_id,
         name = name,
         variable=name,
@@ -81,6 +81,8 @@ def get_humidity():
     unit = "%"
     name = "humid"
     return jsonify(
+        measurement_id = uuid.uuid4(),
+        device_id = device_id,
         name = name,
         humidity=humidity,
         unit=unit,
@@ -93,6 +95,8 @@ def get_moisture():
     moisture = get_moist(moisture_pin)
     name = "moist"
     return jsonify(
+        measurement_id = uuid.uuid4(),
+        device_id = device_id,
         name = name,
         moisture=moisture,
         variable=name
@@ -104,6 +108,8 @@ def get_uv():
     uv = get_uv_light(uv_pin)
     name = uv
     return jsonify(
+        measurement_id = uuid.uuid4(),
+        device_id = device_id,
         name = name,
         uv=uv,
         variable=name
