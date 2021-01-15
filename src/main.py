@@ -110,8 +110,8 @@ def get_uv():
     )
     
 
-with app.test_request_context():
-    s3_aws_init(209, "temp", get_temperature())
+#with app.test_request_context():
+   # s3_aws_init(209, "temp", get_temperature())
 
    
 
