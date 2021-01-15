@@ -14,15 +14,8 @@ from datetime import timedelta, datetime
 
 import uuid
 import time
-import ttn
 
-app_id = "test_kj"
-access_key = "ttn-account-v2.ulvfdlPhaPPTiEbQSJ0uelweBFNVlWUARAJca4sipeU"
-dev_id = "rpitest"
-dev_eui = "00644C3EE7BBCE1E"
-app_eui = "70B3D57ED003B7D4"
-app_key = "800F0166400FB6365775915807094349"
-endpoint_test = "https://94c16c2f5bccf564bc36432a5d11708c.m.pipedream.net"
+
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 app.config['DEBUG'] = False
@@ -117,64 +110,16 @@ def get_uv():
     )
     
 
-#with app.test_request_context():
-   # s3_aws_init(209, "temp", get_temperature())
 with app.test_request_context():
-    key = "Key.{}".format(access_key)
-    endpoint = "https://console.thethingsnetwork.org/applications/test_kj/devices/register"
-    params = {"lorawan_device": {
-               "dev_id": "rpitest_2", 
-               "dev_eui": "00E8B71CFD8A33DB", 
-               "app_key": "916BE91922789D1402F9125BB8258CAB", 
-               "app_eui": "70B3D57ED003B7D4",
-               "app_id": "test_kj", 
-               "activation_constraints": "local", 
-               "uses32_bit_f_cnt": True}, 
-             "app_id": "test_kj", 
-             "dev_id": "rpitest_2",
-             "end_device":"{}"}
-    #params["lorawan_device":"dev_id"] = dev_id
-    #params["lorawan_device":"dev_eui"] = dev_eui
-    #params["lorawan_device":"app_key"] = app_key
-    #params["lorawan_device":"app_eui"] = app_eui
-    #params["lorawan_device":"app_id"] = app_id
-    #params["app_id"] = app_id
-    #params["dev_id"] = dev_id
-    print(params)
-    params_json = json.dumps(params)
+    s3_aws_init(209, "temp", get_temperature())
 
-    response = requests.post(endpoint,headers={'Authorization': key}, data = params_json)
+   
 
-
-    response_test = get_temperature()
-    test = requests.post(endpoint_test, response_test.data)
     
-    print(test)
-
-    def uplink_callback(msg, client):
-      print("Received uplink from ", msg.dev_id)
-      print(msg)
-
-    handler = ttn.HandlerClient(app_id, access_key)
-
-    # using mqtt client
-    mqtt_client = handler.data()
-    mqtt_client.set_uplink_callback(uplink_callback)
-    mqtt_client.connect()
-    time.sleep(60)
-    mqtt_client.close()
-
-    # using application manager client
-    app_client =  handler.application()
-    my_app = app_client.get()
-    print(my_app)
-    my_devices = app_client.devices()
-    print(my_devices)
-if __name__ == '__main__':
-    try:
-        # try the production run
-        app.run(host='0.0.0.0', port=80)
-    except PermissionError:
-        # we're probably on the developer's machine
-        app.run(host='0.0.0.0', port=8080, debug=False)
+try:
+    # try the production run
+    app.run(host='0.0.0.0', port=80)
+except PermissionError:
+    # we're probably on the developer's machine
+    app.run(host='0.0.0.0', port=8080, debug=False)
         
