@@ -131,7 +131,7 @@ with app.test_request_context():
    publish = requests.request('POST',
             publish_url,
             data=data_json.data,
-            cert=['/home/pi', 'home/pi'])
+            cert=['/home/pi', '/home/pi'])
 
 # print results
    print("Response status: ", str(publish.status_code))
