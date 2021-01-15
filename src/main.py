@@ -131,7 +131,7 @@ with app.test_request_context():
    publish = requests.request('POST',
             publish_url,
             data=data_json.data,
-            cert=['/home/pi/rpi_cultivai_test.cert.pem', '/home/pi/rpi_cultivai_test.private.pem'])
+            cert=['~/rpi_cultivai_test.cert.pem', '~/rpi_cultivai_test.private.pem'])
 
 # print results
    print("Response status: ", str(publish.status_code))
