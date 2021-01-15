@@ -122,7 +122,7 @@ with app.test_request_context():
    topic = "rpi_test"
 
 # parse and load command-line parameter values
-   args = parser.parse_args()
+   #args = parser.parse_args()
    data_json = get_temperature()
 # create and format values for HTTPS request
    publish_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
