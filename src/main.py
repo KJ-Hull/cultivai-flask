@@ -119,7 +119,7 @@ def get_uv():
 with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
    endpoint = "acybsaif6qb26-ats.iot.us-west-2.amazonaws.com"
-   topic = "rpi_test_topic"
+   topic = "rpitest"
 
 # parse and load command-line parameter values
    
