@@ -118,20 +118,20 @@ def get_uv():
 
 with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
-   #endpoint = "acybsaif6qb26-ats.iot.us-west-2.amazonaws.com"
-   #topic = "rpi_test_topic"
+   endpoint = "acybsaif6qb26-ats.iot.us-west-2.amazonaws.com"
+   topic = "rpi_test_topic"
 
 # parse and load command-line parameter values
-   #args = parser.parse_args()
+   
    data_json = get_temperature()
 # create and format values for HTTPS request
-   #publish_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
-   publish_url = "https://30a852670cf60085ac15ab5990a19126.m.pipedream.net"
+   publish_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
+   
 # make request
    publish = requests.request('POST',
             publish_url,
-            data=data_json.data)
-            #cert=['/home/pi/rpi_cultivai_test.cert.pem', '/home/pi/rpi_cultivai_test.private.key'])
+            data=data_json.data,
+            cert=['/home/pi/rpi_cultivai_test.cert.pem', '/home/pi/rpi_cultivai_test.private.key'])
 
 # print results
    print("Response status: ", str(publish.status_code))
