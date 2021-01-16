@@ -125,7 +125,7 @@ with app.test_request_context():
    #args = parser.parse_args()
    data_json = get_temperature()
 # create and format values for HTTPS request
-   publish_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
+   publish_url = 'https://' + endpoint + ':8080/topics/' + topic + '?qos=1'
 
 # make request
    publish = requests.request('POST',
