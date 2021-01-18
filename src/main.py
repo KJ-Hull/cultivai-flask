@@ -1,6 +1,6 @@
 import json
 import requests
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 import os
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
@@ -120,7 +120,7 @@ def get_uv():
 
 with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
-   load_dotenv("/home/pi/cultivai-flask/src/device.env")
+   load_dotenv(find_dotenv())
 
    endpoint = os.getenv("ENDPOINT")
    topic = os.getenv("TOPIC")
