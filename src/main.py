@@ -1,6 +1,6 @@
 import json
 import requests
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 import os
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
@@ -24,6 +24,8 @@ app.config['DEBUG'] = False
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'salt'
 CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
+
+env_dir = "/home/pi/cultivai-flask/src/device_var.env"
 
 temp_hum_pin = 17
 moisture_pin = 5
@@ -120,8 +122,8 @@ def get_uv():
 
 with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
-   base_dir = os.path.abspath(os.path.dirname(__file__))
-   load_dotenv(dotenv_path=os.path.join(base_dir, ".env"))
+   
+   dotenv.load_dotenv(env_dir)
 
    endpoint = os.getenv("ENDPOINT")
    topic = os.getenv("TOPIC")
