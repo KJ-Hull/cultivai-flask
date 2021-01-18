@@ -1,5 +1,7 @@
 import json
 import requests
+from dotenv import load_dotenv
+import os
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
 from flask import Flask, request, flash, url_for, redirect, \
@@ -22,6 +24,8 @@ app.config['DEBUG'] = False
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'salt'
 CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
+
+env_direct = '/home/pi/device.env'
 
 temp_hum_pin = 17
 moisture_pin = 5
@@ -118,23 +122,25 @@ def get_uv():
 
 with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
-   endpoint = "acybsaif6qb26-ats.iot.us-west-2.amazonaws.com"
-   topic = "rpi_test"
+   load_dotenv(env_direct)
 
-# parse and load command-line parameter values
-   
+   endpoint = os.getenv("ENDPOINT")
+   topic = os.getenv("TOPIC")
+
+   # Obtain JSON file of temperature and other fields
    data_json = get_temperature()
-# create and format values for HTTPS request
+
+   # Create url based on AWS IoT Core HTTPS endpoint doc
    publish_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
    
-# make request
+   # Make request
    publish = requests.request('POST',
             publish_url,
             data=data_json.data,
-            cert=['/home/pi/rpi_cultivai_test.cert.pem', '/home/pi/rpi_cultivai_test.private.key'])
+            cert=[os.getenv("CERT"), os.getenv("PRIV_KEY")])
 
 
-# print results
+   # Print results, checking what response code is received
    print("Response status: ", str(publish.status_code))
    print(data_json.data)
    if publish.status_code == 200:
