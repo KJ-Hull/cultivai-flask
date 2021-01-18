@@ -25,7 +25,7 @@ app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'salt'
 CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 
-env_dir = "/home/pi/cultivai-flask/src/device_var.env"
+env_dir = "/home/pi/device_var.env"
 
 temp_hum_pin = 17
 moisture_pin = 5
