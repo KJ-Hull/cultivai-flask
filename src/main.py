@@ -126,7 +126,8 @@ with app.test_request_context():
 
    endpoint = os.getenv("ENDPOINT")
    topic = os.getenv("TOPIC")
-
+   print(endpoint)
+   print(topic)
    # Obtain JSON file of temperature and other fields
    data_json = get_temperature()
 
