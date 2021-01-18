@@ -1,6 +1,6 @@
 import json
 import requests
-from dotenv import load_dotenv
+import dotenv
 import os
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
