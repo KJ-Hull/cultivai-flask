@@ -120,7 +120,8 @@ def get_uv():
 
 with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
-   load_dotenv(find_dotenv())
+   base_dir = os.path.abspath(os.path.dirname(__file__))
+   load_dotenv(dotenv_path=os.path.join(base_dir, ".env"))
 
    endpoint = os.getenv("ENDPOINT")
    topic = os.getenv("TOPIC")
