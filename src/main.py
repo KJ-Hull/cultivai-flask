@@ -71,7 +71,7 @@ def get_temperature():
     unit = "Celcius"
     name = "temp"
     return jsonify(
-        measurement_id = uuid.uuid4(),
+        measurement_id = str(uuid.uuid4()),
         device_id = device_id,
         name = name,
         variable=name,
