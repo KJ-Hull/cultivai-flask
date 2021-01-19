@@ -75,7 +75,7 @@ def get_temperature():
         device_id = device_id,
         name = name,
         variable=name,
-        temperature=temperature
+        temperature=str(temperature)
     )
     
 
@@ -127,8 +127,7 @@ with app.test_request_context():
 
    endpoint = os.getenv("ENDPOINT")
    topic = os.getenv("TOPIC")
-   print(endpoint)
-   print(topic)
+   
    # Obtain JSON file of temperature and other fields
    data_json = get_temperature()
 
@@ -149,8 +148,6 @@ with app.test_request_context():
        print("Response body:", publish.text)
 
    
-
-    
 try:
     # try the production run
     app.run(host='0.0.0.0', port=80)
