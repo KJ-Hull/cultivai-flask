@@ -72,7 +72,7 @@ def get_temperature():
     name = "temp"
     return jsonify(
         measurement_id = str(uuid.uuid4()),
-        device_id = device_id,
+        device_id = str(device_id),
         name = name,
         variable=name,
         temperature=str(temperature)
