@@ -2,6 +2,8 @@ import requests
 from dotenv import load_dotenv
 import os
 
+env_dir = "/home/pi/device_var.env"
+
 def post_meas(meas_json):
     load_dotenv(env_dir)
     endpoint = os.getenv("ENDPOINT")

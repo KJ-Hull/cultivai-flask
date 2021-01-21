@@ -13,8 +13,6 @@ import uuid
 import time
 from request_handling import post_meas
 
-env_dir = "/home/pi/device_var.env"
-
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
