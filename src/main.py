@@ -5,25 +5,15 @@ import os
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
-from flask import Flask, request, flash, url_for, redirect, \
-     render_template, jsonify, Response, send_file
 
 from control import set_status, get_status, get_temp, get_humid, get_moist, get_uv_light
 import RPi.GPIO as GPIO
-
-from flask_cors import CORS
 import requests
 from datetime import timedelta, datetime
 
 import uuid
 import time
-
-app = Flask(__name__)
-content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
-app.config['DEBUG'] = False
-app.config['SECRET_KEY'] = 'super-secret'
-app.config['SECURITY_PASSWORD_SALT'] = 'salt'
-CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
+import meas_post
 
 env_dir = "/home/pi/device_var.env"
 
@@ -33,26 +23,6 @@ uv_pin = 16
 device_id = 'ef720fc0-20ca-4485-92fe-c95c67ee9307'
 measurement_id = ""
 
-@app.route('/')
-def home():
-    return render_template('dashboard.html')
-
-@app.route('/status')
-def get_stats():
-    humidity = get_humid(temp_hum_pin)
-    temperature = get_temp(temp_hum_pin)
-    moisture = get_moist(moisture_pin)
-    uv = get_uv_light(uv_pin)
-    response = jsonify(
-        humidity=humidity,
-        temperature=temperature,
-        moisture=moisture,
-        uv=uv
-    )  
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
-
-@app.route('/schedule', methods = ['POST', 'GET'])
 def post_schedule():
     if request.method == 'POST':
         req_data = request.get_json()
@@ -65,7 +35,6 @@ def post_schedule():
             data = json.load(f)
         return jsonify(data)
 
-@app.route('/temperature')
 def get_temperature():
     temperature = get_temp(temp_hum_pin)
     name = "temperature"
@@ -76,9 +45,7 @@ def get_temperature():
         temperature=str(temperature),
         #name = name,
     )
-    
 
-@app.route('/humidity')
 def get_humidity():
     humidity = get_humid(temp_hum_pin)
     unit = "%"
@@ -91,9 +58,7 @@ def get_humidity():
         unit=unit,
         variable=name
     )
-    
 
-@app.route('/moisture')
 def get_moisture():
     moisture = get_moist(moisture_pin)
     name = "moist"
@@ -105,8 +70,6 @@ def get_moisture():
         variable=name
     )
     
-
-@app.route('/uv')
 def get_uv():
     uv = get_uv_light(uv_pin)
     name = uv
@@ -118,40 +81,8 @@ def get_uv():
         variable=name
     )
 
+post_meas(get(get_temperature))
 
-with app.test_request_context():
-   # s3_aws_init(209, "temp", get_temperature())
+# s3_aws_init(209, "temp", get_temperature())
    
-   load_dotenv(env_dir)
-
-   endpoint = os.getenv("ENDPOINT")
-   topic = os.getenv("POST_TOPIC")
-   
-   # Obtain JSON file of temperature and other fields
-   data_json = get_temperature()
-
-   # Create url based on AWS IoT Core HTTPS endpoint doc
-   iot_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
-   
-   # Make request
-   publish = requests.request('POST',
-            iot_url,
-            data=data_json.data,
-            cert=[os.getenv("CERT"), os.getenv("PRIV_KEY")])
-
-   # Print results, checking what response code is received
-   print("Response status: ", str(publish.status_code))
-   print(data_json.data)
-   if publish.status_code == 200:
-       print("Response body:", publish.text)
-   
-   
-   
-   
-try:
-    # try the production run
-    app.run(host='0.0.0.0', port=80)
-except PermissionError:
-    # we're probably on the developer's machine
-    app.run(host='0.0.0.0', port=8080, debug=False)
-        
+ 
