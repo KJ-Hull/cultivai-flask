@@ -5,12 +5,11 @@ import os
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
-
 from control import set_status, get_status, get_temp, get_humid, get_moist, get_uv_light
 import RPi.GPIO as GPIO
 import requests
 from datetime import timedelta, datetime
-
+import flask
 import uuid
 import time
 from request_handling import post_meas
@@ -42,7 +41,7 @@ def get_temperature():
         #measurement_id = str(uuid.uuid4()),
         variable=name,
         device_id = device_id,
-        temperature=str(temperature),
+        temperature=str(temperature)
         #name = name,
     )
 
