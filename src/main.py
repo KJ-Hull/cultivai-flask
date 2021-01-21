@@ -39,40 +39,23 @@ def get_temperature():
 
 def get_humidity():
     humidity = get_humid(temp_hum_pin)
-    unit = "%"
-    name = "humid"
-    return jsonify(
-        measurement_id = uuid.uuid4(),
-        device_id = device_id,
-        name = name,
-        humidity=humidity,
-        unit=unit,
-        variable=name
-    )
+    name = "humidity"
+    json_humid= {"variable":name, "value":str(humidity),"device_id":device_id}
+    return json.dumps(json_humid)
 
 def get_moisture():
     moisture = get_moist(moisture_pin)
-    name = "moist"
-    return jsonify(
-        measurement_id = uuid.uuid4(),
-        device_id = device_id,
-        name = name,
-        moisture=moisture,
-        variable=name
-    )
+    name = "moisture"
+    json_moist= {"variable":name, "value":moisture,"device_id":device_id}
+    return json.dumps(json_humid)
     
 def get_uv():
     uv = get_uv_light(uv_pin)
-    name = uv
-    return jsonify(
-        measurement_id = uuid.uuid4(),
-        device_id = device_id,
-        name = name,
-        uv=uv,
-        variable=name
-    )
+    name = "uv"
+    json_uv= {"variable":name, "value":uv,"device_id":device_id}
+    return json.dumps(json_uv)
 
-post_meas(get_temperature())
+post_meas(get_humidity())
 
 # s3_aws_init(209, "temp", get_temperature())
    
