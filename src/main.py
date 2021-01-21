@@ -79,8 +79,8 @@ def get_uv():
         uv=uv,
         variable=name
     )
-
-post_meas(get_temperature())
+with app.app_context():
+    post_meas(get_temperature())
 
 # s3_aws_init(209, "temp", get_temperature())
    
