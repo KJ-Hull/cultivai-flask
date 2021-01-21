@@ -13,7 +13,7 @@ from datetime import timedelta, datetime
 
 import uuid
 import time
-import meas_post
+from request_handling import post_meas
 
 env_dir = "/home/pi/device_var.env"
 
@@ -81,7 +81,7 @@ def get_uv():
         variable=name
     )
 
-post_meas(get(get_temperature))
+post_meas(get_temperature())
 
 # s3_aws_init(209, "temp", get_temperature())
    
