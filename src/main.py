@@ -9,7 +9,7 @@ from control import set_status, get_status, get_temp, get_humid, get_moist, get_
 import RPi.GPIO as GPIO
 import requests
 from datetime import timedelta, datetime
-from flask import jsonify
+from flask import Flask, jsonify
 import uuid
 import time
 from request_handling import post_meas
