@@ -12,6 +12,7 @@ from datetime import timedelta, datetime
 import uuid
 import time
 from request_handling import post_meas
+import argparse
 
 temp_hum_pin = 17
 moisture_pin = 5
@@ -54,6 +55,10 @@ def get_uv():
     name = "uv"
     json_uv= {"variable":name, "value":uv,"device_id":device_id}
     return json.dumps(json_uv)
+
+parser = argparse.ArgumentParser(description='Choosing sensor to measure.')
+parser.add_argument('sensor','--sensor', required=True,
+                    help='temperature, humidity, moisture, uv')
 
 post_meas(get_humidity())
 
