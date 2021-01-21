@@ -17,7 +17,6 @@ from datetime import timedelta, datetime
 
 import uuid
 import time
-import argparse
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
@@ -126,17 +125,17 @@ with app.test_request_context():
    load_dotenv(env_dir)
 
    endpoint = os.getenv("ENDPOINT")
-   topic = os.getenv("TOPIC")
+   topic = os.getenv("POST_TOPIC")
    
    # Obtain JSON file of temperature and other fields
    data_json = get_temperature()
 
    # Create url based on AWS IoT Core HTTPS endpoint doc
-   publish_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
+   iot_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
    
    # Make request
    publish = requests.request('POST',
-            publish_url,
+            iot_url,
             data=data_json.data,
             cert=[os.getenv("CERT"), os.getenv("PRIV_KEY")])
 
@@ -145,7 +144,9 @@ with app.test_request_context():
    print(data_json.data)
    if publish.status_code == 200:
        print("Response body:", publish.text)
-
+   
+   
+   
    
 try:
     # try the production run
