@@ -2,6 +2,7 @@ import json
 import requests
 from dotenv import load_dotenv
 import os
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
 from flask import Flask, request, flash, url_for, redirect, \
@@ -30,7 +31,7 @@ env_dir = "/home/pi/device_var.env"
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
-device_id = 209
+device_id = 'ef720fc0-20ca-4485-92fe-c95c67ee9307'
 measurement_id = ""
 
 @app.route('/')
@@ -68,14 +69,13 @@ def post_schedule():
 @app.route('/temperature')
 def get_temperature():
     temperature = get_temp(temp_hum_pin)
-    unit = "Celcius"
-    name = "temp"
+    name = "temperature"
     return jsonify(
-        measurement_id = str(uuid.uuid4()),
-        device_id = str(device_id),
-        name = name,
+        #measurement_id = str(uuid.uuid4()),
         variable=name,
-        temperature=str(temperature)
+        device_id = device_id,
+        temperature=str(temperature),
+        #name = name,
     )
     
 
@@ -118,7 +118,7 @@ def get_uv():
         uv=uv,
         variable=name
     )
-    
+
 
 with app.test_request_context():
    # s3_aws_init(209, "temp", get_temperature())
@@ -139,7 +139,6 @@ with app.test_request_context():
             publish_url,
             data=data_json.data,
             cert=[os.getenv("CERT"), os.getenv("PRIV_KEY")])
-
 
    # Print results, checking what response code is received
    print("Response status: ", str(publish.status_code))
