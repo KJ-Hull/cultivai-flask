@@ -10,7 +10,7 @@ def post_meas(meas_json):
     topic = os.getenv("POST_TOPIC")
    
     # Obtain JSON file of temperature and other fields
-    data_json = get_temperature()
+    data_json = meas_json
 
     # Create url based on AWS IoT Core HTTPS endpoint doc
     iot_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
@@ -18,7 +18,7 @@ def post_meas(meas_json):
     # Make request
     publish = requests.request('POST',
             iot_url,
-            data=data_json.data,
+            data=data_json,
             cert=[os.getenv("CERT"), os.getenv("PRIV_KEY")])
 
     # Print results, checking what response code is received
