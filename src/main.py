@@ -9,7 +9,6 @@ from control import set_status, get_status, get_temp, get_humid, get_moist, get_
 import RPi.GPIO as GPIO
 import requests
 from datetime import timedelta, datetime
-from flask import Flask, jsonify
 import uuid
 import time
 from request_handling import post_meas
@@ -37,13 +36,8 @@ def post_schedule():
 def get_temperature():
     temperature = get_temp(temp_hum_pin)
     name = "temperature"
-    return jsonify(
-        #measurement_id = str(uuid.uuid4()),
-        variable=name,
-        device_id = device_id,
-        temperature=str(temperature)
-        #name = name,
-    )
+    json_temp = {"variable":name, "value":str(temperature),"device_id":device_id}
+    return json_temp
 
 def get_humidity():
     humidity = get_humid(temp_hum_pin)
@@ -79,8 +73,8 @@ def get_uv():
         uv=uv,
         variable=name
     )
-with app.app_context():
-    post_meas(get_temperature())
+
+post_meas(get_temperature())
 
 # s3_aws_init(209, "temp", get_temperature())
    
