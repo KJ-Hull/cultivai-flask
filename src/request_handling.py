@@ -1,5 +1,5 @@
 import requests
-import dotenv
+from dotenv import load_dotenv
 import os
 
 def post_meas(meas_json):
