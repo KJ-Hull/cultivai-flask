@@ -23,7 +23,6 @@ def post_meas(meas_json):
 
     # Print results, checking what response code is received
     print("Response status: ", str(publish.status_code))
-    print(data_json.data)
     if publish.status_code == 200:
         print("Response body:", publish.text)
 
