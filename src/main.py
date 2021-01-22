@@ -59,9 +59,16 @@ def get_uv():
 parser = argparse.ArgumentParser(description='Choosing sensor to measure.')
 parser.add_argument('sensor','--sensor', required=True,
                     help='temperature, humidity, moisture, uv')
+args = str(parser.parse_args())
 
-post_meas(get_humidity())
-
+if args == "temperature":
+    post_meas(get_temperature())
+if args == "humidity":
+    post_meas(get_humidity())
+if args == "moisture":
+    post_meas(get_moisture())
+if args == "uv":
+    post_meas(get_uv())
 # s3_aws_init(209, "temp", get_temperature())
    
  
