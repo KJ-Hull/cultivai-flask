@@ -61,13 +61,13 @@ parser.add_argument('sensor', help='temperature, humidity, moisture, uv')
 args = parser.parse_args()
 argument = args.sensor
 
-if args == "temperature":
+if argument == "temperature":
     post_meas(get_temperature())
-if args == "humidity":
+if argument == "humidity":
     post_meas(get_humidity())
-if args == "moisture":
+if argument == "moisture":
     post_meas(get_moisture())
-if args == "uv":
+if argument == "uv":
     post_meas(get_uv())
 
 
