@@ -57,8 +57,7 @@ def get_uv():
     return json.dumps(json_uv)
 
 parser = argparse.ArgumentParser(description='Choosing sensor to measure.')
-parser.add_argument('sensor', required=True,
-                    help='temperature, humidity, moisture, uv')
+parser.add_argument('sensor', help='temperature, humidity, moisture, uv')
 args = parser.parse_args()
 argument = args.sensor
 
