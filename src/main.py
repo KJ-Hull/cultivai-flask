@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import paho.mqtt.client as mqtt
 import ssl
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
 from control import set_status, get_status, get_temp, get_humid, get_moist, get_uv_light
@@ -65,7 +66,7 @@ MQTT_KEEPALIVE_INTERVAL = 45
 env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
 
-
+client_id = "rpi_device"
 MQTT_TOPIC = os.getenv("GET_TOPIC")
 CA_ROOT_CERT_FILE = os.getenv("CA")
 THING_CERT_FILE = os.getenv("CERT")
@@ -74,10 +75,8 @@ MQTT_ENDPOINT = os.getenv("ENDPOINT")
 
 MQTT_HOST = 'https://' + MQTT_ENDPOINT + ':8443/topics/' + MQTT_TOPIC + '?qos=0'
 print(MQTT_HOST)
-def on_connect(mosq, obj, rc):
-    mqttc.subscribe(MQTT_TOPIC, 0)
 
-def on_message(mosq, obj, msg):
+def customCallback(client, userdata, msg):
     json_action = msg.payload
     action_type = json_action["action_type"]
     print(action_type)
@@ -86,33 +85,38 @@ def on_message(mosq, obj, msg):
     received_variable = json_action["variable"]
     print(received_variable)
 
-
-def on_subscribe(mosq, obj, mid, granted_qos):
-    print("Subscribed to Topic: " + 
-	MQTT_MSG + " with QoS: " + str(granted_qos))
-
 print("hello")
 mqttc = mqtt.Client()
 
-mqttc.on_message = on_message
-mqttc.on_connect = on_connect
-mqttc.on_subscribe = on_subscribe
+myAWSIoTMQTTClient = AWSIoTMQTTClient(client_id)
+myAWSIoTMQTTClient.configureEndpoint(MQTT_HOST, 8443)
+myAWSIoTMQTTClient.configureCredentials(rootCAPath, privateKeyPath, certificatePath)
 
-mqttc.tls_set(CA_ROOT_CERT_FILE, certfile=THING_CERT_FILE, keyfile=THING_PRIVATE_KEY, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
+myAWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
+myAWSIoTMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
+myAWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
+myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
+myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
-mqttc.connect(MQTT_HOST, 443)
+myAWSIoTMQTTClient.connect()
 
-if action_type == "measurement":
-    if received_variable == "temperature":
-        post_meas(get_temperature())
-    if received_varaible == "humidity":
-        post_meas(get_humidity())
-    if received_variable == "moisture":
-        post_meas(get_moisture())
-    if received_variable == "uv":
-        post_meas(get_uv())
+loopCount = 0
+while True:
+    myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 1, customCallback)
 
-mqttc.loop_forever()
+    if action_type == "measurement":
+        if received_variable == "temperature":
+            post_meas(get_temperature())
+            myAWSIoTMQTTClient.publish(MQTT_TOPIC, "Temperature Sent", 1)
+            action_type == ""
+        if received_varaible == "humidity":
+            post_meas(get_humidity())
+        if received_variable == "moisture":
+            post_meas(get_moisture())
+        if received_variable == "uv":
+            post_meas(get_uv())
+    loopCount += 1
+    time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
    
