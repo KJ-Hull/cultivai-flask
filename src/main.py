@@ -87,22 +87,22 @@ def customCallback(client, userdata, msg):
 
 print("hello")
 
-myAWSIoTMQTTClient = AWSIoTMQTTClient(client_id)
-myAWSIoTMQTTClient.configureEndpoint(MQTT_HOST, MQTT_PORT)
-myAWSIoTMQTTClient.configureCredentials(CA_ROOT_CERT_FILE, THING_PRIVATE_KEY, THING_CERT_FILE)
+rpi_mqtt_client = AWSIoTMQTTClient(client_id)
+rpi_mqtt_client.configureEndpoint(MQTT_HOST, MQTT_PORT)
+rpi_mqtt_client.configureCredentials(CA_ROOT_CERT_FILE, THING_PRIVATE_KEY, THING_CERT_FILE)
 
-myAWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
-myAWSIoTMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
-myAWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
-myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
-myAWSIoTMQTTClient.configureMQTTOperationTimeout(10)  # 5 sec
+rpi_mqtt_client.configureAutoReconnectBackoffTime(1, 32, 20)
+rpi_mqtt_client.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
+rpi_mqtt_client.configureDrainingFrequency(2)  # Draining: 2 Hz
+rpi_mqtt_client.configureConnectDisconnectTimeout(10)  # 10 sec
+rpi_mqtt_client.configureMQTTOperationTimeout(10)  # 5 sec
 
-myAWSIoTMQTTClient.connect()
+rpi_mqtt_client.connect()
 
 loopCount = 0
 print(loopCount)
 while True:
-    myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 0, customCallback)
+    rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
 
     if action_type == "measurement":
         if received_variable == "temperature":
