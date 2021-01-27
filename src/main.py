@@ -60,7 +60,7 @@ def get_uv():
     json_uv= {"variable":name, "value":uv,"device_id":device_id}
     return json.dumps(json_uv)
 
-MQTT_PORT = 8443
+MQTT_PORT = 8883
 MQTT_KEEPALIVE_INTERVAL = 45
 
 env_dir = "/home/pi/device_var.env"
@@ -87,7 +87,6 @@ def customCallback(client, userdata, msg):
 
 print("hello")
 
-
 myAWSIoTMQTTClient = AWSIoTMQTTClient(client_id)
 myAWSIoTMQTTClient.configureEndpoint(MQTT_HOST, MQTT_PORT)
 myAWSIoTMQTTClient.configureCredentials(CA_ROOT_CERT_FILE, THING_PRIVATE_KEY, THING_CERT_FILE)
@@ -101,6 +100,7 @@ myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 myAWSIoTMQTTClient.connect()
 
 loopCount = 0
+
 while True:
     myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 1, customCallback)
 
