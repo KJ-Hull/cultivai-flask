@@ -102,7 +102,7 @@ myAWSIoTMQTTClient.connect()
 loopCount = 0
 
 while True:
-    myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 1, customCallback)
+    myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 0, customCallback)
 
     if action_type == "measurement":
         if received_variable == "temperature":
