@@ -99,22 +99,25 @@ rpi_mqtt_client.configureMQTTOperationTimeout(10)
 
 rpi_mqtt_client.connect()
 
-
-rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
-print(action_type)
-if action_type == "measurement":
-    if received_variable == "temperature":
-        post_meas(get_temperature())
-        myAWSIoTMQTTClient.publish(MQTT_TOPIC, "Temperature Sent", 1)
-        action_type == ""
-    if received_varaible == "humidity":
-        post_meas(get_humidity())
-    if received_variable == "moisture":
-        post_meas(get_moisture())
-    if received_variable == "uv":
-        post_meas(get_uv())
-    
- 
+loopCount = 0
+print(loopCount)
+while True:
+    rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
+    print(action_type)
+    if action_type == "measurement":
+        if received_variable == "temperature":
+            post_meas(get_temperature())
+            myAWSIoTMQTTClient.publish(MQTT_TOPIC, "Temperature Sent", 1)
+            action_type == ""
+        if received_varaible == "humidity":
+            post_meas(get_humidity())
+        if received_variable == "moisture":
+            post_meas(get_moisture())
+        if received_variable == "uv":
+            post_meas(get_uv())
+    loopCount += 1
+    print(loopCount)
+    time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
    
