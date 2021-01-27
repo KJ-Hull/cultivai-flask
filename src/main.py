@@ -102,7 +102,7 @@ myAWSIoTMQTTClient.connect()
 loopCount = 0
 
 while True:
-    myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 0, customCallback)
+    myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 1, customCallback)
 
     if action_type == "measurement":
         if received_variable == "temperature":
@@ -116,6 +116,7 @@ while True:
         if received_variable == "uv":
             post_meas(get_uv())
     loopCount += 1
+    print(loopCount)
     time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
