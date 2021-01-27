@@ -14,7 +14,7 @@ def post_meas(meas_json):
 
     # Create url based on AWS IoT Core HTTPS endpoint doc
     post_url_test = 'http://api.cultiv.ai/api/data/measurement/'
-    login_headers = 'Api-key ' + str(os.environ.get("API_KEY"))
+    login_headers = 'Api-Key ' + str(os.environ.get("API_KEY"))
     print(login_headers)
     # Make request
     publish = requests.request('POST',
