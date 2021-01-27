@@ -80,8 +80,11 @@ def on_connect(mosq, obj, rc):
 def on_message(mosq, obj, msg):
     json_action = msg.payload
     action_type = json_action["action_type"]
+    print(action_type)
     received_dev_id = json_action["device_id"]
+    print(received_dev_id)
     received_variable = json_action["variable"]
+    print(received_variable)
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):
@@ -97,7 +100,6 @@ mqttc.on_subscribe = on_subscribe
 mqttc.tls_set(CA_ROOT_CERT_FILE, certfile=THING_CERT_FILE, keyfile=THING_PRIVATE_KEY, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
 
 mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
-
 if action_type == "measurement":
     if received_variable == "temperature":
         post_meas(get_temperature())
