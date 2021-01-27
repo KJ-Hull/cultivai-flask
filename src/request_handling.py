@@ -13,13 +13,13 @@ def post_meas(meas_json):
     data_json = meas_json
 
     # Create url based on AWS IoT Core HTTPS endpoint doc
-    iot_url = 'https://' + endpoint + ':8443/topics/' + topic + '?qos=1'
-   
+    post_url_test = 'http://api.cultiv.ai/api/data/measurement/'
+    login_headers = 'Api-key ' + str(os.environ.get("API_KEY"))
     # Make request
     publish = requests.request('POST',
             iot_url,
             data=data_json,
-            cert=[os.getenv("CERT"), os.getenv("PRIV_KEY")])
+            headers = {'Content-Type': 'application/json', 'Authorization':login_headers})
 
     # Print results, checking what response code is received
     print("Response status: ", str(publish.status_code))
