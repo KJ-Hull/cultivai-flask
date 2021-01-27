@@ -98,25 +98,25 @@ myAWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
 myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
 myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
-#myAWSIoTMQTTClient.connect()
-post_meas(get_temperature())
-#loopCount = 0
-#while True:
-    #myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 1, customCallback)
+myAWSIoTMQTTClient.connect()
 
-    #if action_type == "measurement":
-     #   if received_variable == "temperature":
-     #       post_meas(get_temperature())
-      #      myAWSIoTMQTTClient.publish(MQTT_TOPIC, "Temperature Sent", 1)
-      #      action_type == ""
-      #  if received_varaible == "humidity":
-      #      post_meas(get_humidity())
-      #  if received_variable == "moisture":
-      #      post_meas(get_moisture())
-      #  if received_variable == "uv":
-    #        post_meas(get_uv())
-    #loopCount += 1
-    #time.sleep(1)
+loopCount = 0
+while True:
+    myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 1, customCallback)
+
+    if action_type == "measurement":
+        if received_variable == "temperature":
+            post_meas(get_temperature())
+            myAWSIoTMQTTClient.publish(MQTT_TOPIC, "Temperature Sent", 1)
+            action_type == ""
+        if received_varaible == "humidity":
+            post_meas(get_humidity())
+        if received_variable == "moisture":
+            post_meas(get_moisture())
+        if received_variable == "uv":
+            post_meas(get_uv())
+    loopCount += 1
+    time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
    
