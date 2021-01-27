@@ -98,8 +98,8 @@ myAWSIoTMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
 myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
 myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
-myAWSIoTMQTTClient.connect()
-
+#myAWSIoTMQTTClient.connect()
+post_meas(get_temperature())
 loopCount = 0
 while True:
     myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 1, customCallback)
