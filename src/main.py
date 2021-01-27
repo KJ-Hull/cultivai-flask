@@ -100,7 +100,7 @@ myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 myAWSIoTMQTTClient.connect()
 
 loopCount = 0
-
+print(loopCount)
 while True:
     myAWSIoTMQTTClient.subscribe(MQTT_TOPIC, 1, customCallback)
 
