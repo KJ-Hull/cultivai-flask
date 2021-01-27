@@ -73,7 +73,7 @@ THING_CERT_FILE = os.getenv("CERT")
 THING_PRIVATE_KEY = os.getenv("PRIV_KEY")
 MQTT_ENDPOINT = os.getenv("ENDPOINT")
 
-MQTT_HOST = 'https://' + MQTT_ENDPOINT + ':8443/topics/' + MQTT_TOPIC + '?qos=0'
+MQTT_HOST = 'acybsaif6qb26-ats.iot.us-west-2.amazonaws.com'
 print(MQTT_HOST)
 
 def customCallback(client, userdata, msg):
@@ -86,10 +86,9 @@ def customCallback(client, userdata, msg):
     print(received_variable)
 
 print("hello")
-mqttc = mqtt.Client()
 
 myAWSIoTMQTTClient = AWSIoTMQTTClient(client_id)
-myAWSIoTMQTTClient.configureEndpoint(MQTT_HOST, 8883)
+myAWSIoTMQTTClient.configureEndpoint(MQTT_HOST, MQTT_PORT)
 myAWSIoTMQTTClient.configureCredentials(CA_ROOT_CERT_FILE, THING_PRIVATE_KEY, THING_CERT_FILE)
 
 myAWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
