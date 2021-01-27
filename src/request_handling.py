@@ -20,7 +20,7 @@ def post_meas(meas_json):
     publish = requests.request('POST',
             post_url_test,
             data=data_json,
-            headers = {'Content-Type': 'application/json', 'Authorization':login_headers})
+            headers = {'Authorization':login_headers})
 
     # Print results, checking what response code is received
     print("Response status: ", str(publish.status_code))
