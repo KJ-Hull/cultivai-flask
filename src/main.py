@@ -77,8 +77,7 @@ MQTT_HOST = os.getenv('THING_HOST')
 print(MQTT_HOST)
 
 def customCallback(client, userdata, msg):
-    json_action = msg.payload
-    print(json_action)
+    json_action = json.loads(msg.payload)
     action_type = json_action["action_type"]
     print(action_type)
     received_dev_id = json_action["device_id"]
