@@ -73,7 +73,7 @@ THING_CERT_FILE = os.getenv("CERT")
 THING_PRIVATE_KEY = os.getenv("PRIV_KEY")
 MQTT_ENDPOINT = os.getenv("ENDPOINT")
 
-MQTT_HOST = 'acybsaif6qb26-ats.iot.us-west-2.amazonaws.com'
+MQTT_HOST = os.getenv('THING_HOST')
 print(MQTT_HOST)
 
 def customCallback(client, userdata, msg):
@@ -86,6 +86,7 @@ def customCallback(client, userdata, msg):
     print(received_variable)
 
 print("hello")
+
 
 myAWSIoTMQTTClient = AWSIoTMQTTClient(client_id)
 myAWSIoTMQTTClient.configureEndpoint(MQTT_HOST, MQTT_PORT)
