@@ -17,7 +17,7 @@ def post_meas(meas_json):
     login_headers = 'Api-key ' + str(os.environ.get("API_KEY"))
     # Make request
     publish = requests.request('POST',
-            iot_url,
+            post_url_test,
             data=data_json,
             headers = {'Content-Type': 'application/json', 'Authorization':login_headers})
 
