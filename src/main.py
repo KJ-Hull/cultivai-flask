@@ -66,7 +66,7 @@ MQTT_KEEPALIVE_INTERVAL = 45
 env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
 
-client_id = "rpi_device"
+client_id = "RPI_device"
 MQTT_TOPIC = os.getenv("GET_TOPIC")
 CA_ROOT_CERT_FILE = os.getenv("CA")
 THING_CERT_FILE = os.getenv("CERT")
