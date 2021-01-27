@@ -100,7 +100,7 @@ mqttc.on_subscribe = on_subscribe
 
 mqttc.tls_set(CA_ROOT_CERT_FILE, certfile=THING_CERT_FILE, keyfile=THING_PRIVATE_KEY, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
 
-mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
+mqttc.connect(MQTT_HOST, 443)
 
 if action_type == "measurement":
     if received_variable == "temperature":
