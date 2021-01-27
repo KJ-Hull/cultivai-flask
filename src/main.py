@@ -59,7 +59,7 @@ def get_uv():
     json_uv= {"variable":name, "value":uv,"device_id":device_id}
     return json.dumps(json_uv)
 
-MQTT_PORT = 8883
+MQTT_PORT = 8443
 MQTT_KEEPALIVE_INTERVAL = 45
 
 env_dir = "/home/pi/device_var.env"
@@ -73,7 +73,7 @@ THING_PRIVATE_KEY = os.getenv("PRIV_KEY")
 MQTT_ENDPOINT = os.getenv("ENDPOINT")
 
 MQTT_HOST = 'https://' + MQTT_ENDPOINT + ':8443/topics/' + MQTT_TOPIC + '?qos=1'
-
+print(MQTT_HOST)
 def on_connect(mosq, obj, rc):
     mqttc.subscribe(MQTT_TOPIC, 0)
 
