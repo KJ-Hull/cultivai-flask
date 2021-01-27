@@ -117,7 +117,6 @@ while True:
             post_meas(get_uv())
     loopCount += 1
     print(loopCount)
-    time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
    
