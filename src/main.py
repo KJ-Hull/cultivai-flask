@@ -103,7 +103,7 @@ loopCount = 0
 print(loopCount)
 while True:
     rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
-
+    print(action_type)
     if action_type == "measurement":
         if received_variable == "temperature":
             post_meas(get_temperature())
