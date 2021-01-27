@@ -90,7 +90,7 @@ mqttc = mqtt.Client()
 
 myAWSIoTMQTTClient = AWSIoTMQTTClient(client_id)
 myAWSIoTMQTTClient.configureEndpoint(MQTT_HOST, 8443)
-myAWSIoTMQTTClient.configureCredentials(rootCAPath, privateKeyPath, certificatePath)
+myAWSIoTMQTTClient.configureCredentials(CA_ROOT_CERT_FILE, THING_PRIVATE_KEY, THING_CERT_FILE)
 
 myAWSIoTMQTTClient.configureAutoReconnectBackoffTime(1, 32, 20)
 myAWSIoTMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
