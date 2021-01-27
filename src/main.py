@@ -77,7 +77,7 @@ MQTT_HOST = os.getenv('THING_HOST')
 print(MQTT_HOST)
 
 def customCallback(client, userdata, msg):
-    json_action = json.dumps(msg.payload)
+    json_action = msg.payload
     print(json_action)
     action_type = json_action["action_type"]
     print(action_type)
@@ -96,7 +96,7 @@ rpi_mqtt_client.configureAutoReconnectBackoffTime(1, 32, 20)
 rpi_mqtt_client.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
 rpi_mqtt_client.configureDrainingFrequency(2)  # Draining: 2 Hz
 rpi_mqtt_client.configureConnectDisconnectTimeout(10)  # 10 sec
-rpi_mqtt_client.configureMQTTOperationTimeout(10)  # 5 sec
+rpi_mqtt_client.configureMQTTOperationTimeout(10)  
 
 rpi_mqtt_client.connect()
 
