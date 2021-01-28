@@ -78,7 +78,7 @@ print(MQTT_HOST)
 
 def customCallback(client, userdata, msg):
     json_action = json.loads(msg.payload)
-    action_type = json_action["action_type"]
+    action_type = str(json_action["action_type"])
     print(action_type)
     received_dev_id = json_action["device_id"]
     print(received_dev_id)
@@ -99,12 +99,10 @@ rpi_mqtt_client.configureMQTTOperationTimeout(10)
 
 rpi_mqtt_client.connect()
 
-loopCount = 0
 print(loopCount)
 while True:
     print(action_type)
     rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
-    post_meas(get_humidity())
     if action_type == "measurement":
         if received_variable == "temperature":
             post_meas(get_temperature())
@@ -116,8 +114,7 @@ while True:
             post_meas(get_moisture())
         if received_variable == "uv":
             post_meas(get_uv())
-    loopCount += 1
-    print(loopCount)
+    time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
    
