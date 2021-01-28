@@ -1,7 +1,7 @@
 import requests
 from dotenv import load_dotenv
 import os
-
+import json
 env_dir = "/home/pi/device_var.env"
 
 def post_meas(meas_json):
