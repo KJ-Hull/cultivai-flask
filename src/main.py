@@ -113,10 +113,22 @@ while True:
             received_dev_id = ''
         if received_variable == "humidity":
             post_meas(get_humidity())
+            print("Humidity Sent")
+            action_type = ''
+            received_variable = ''
+            received_dev_id = ''
         if received_variable == "moisture":
             post_meas(get_moisture())
+            print("Moisture Sent")
+            action_type = ''
+            received_variable = ''
+            received_dev_id = ''
         if received_variable == "uv":
             post_meas(get_uv())
+            print("UV Sent")
+            action_type = ''
+            received_variable = ''
+            received_dev_id = ''
     time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
