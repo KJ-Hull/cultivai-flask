@@ -20,9 +20,6 @@ moisture_pin = 5
 uv_pin = 16
 device_id = 'ef720fc0-20ca-4485-92fe-c95c67ee9307'
 measurement_id = ""
-action_type = ''
-received_dev_id = ''
-received_variable = ''
 
 def post_schedule():
     if request.method == 'POST':
@@ -77,6 +74,9 @@ MQTT_HOST = os.getenv('THING_HOST')
 print(MQTT_HOST)
 
 def customCallback(client, userdata, msg):
+    global action_type
+    global received_dev_id
+    global received_variable
     json_action = json.loads(msg.payload)
     action_type = str(json_action["action_type"])
     print(action_type)
@@ -84,8 +84,6 @@ def customCallback(client, userdata, msg):
     print(received_dev_id)
     received_variable = str(json_action["variable"])
     print(received_variable)
-
-print("hello")
 
 rpi_mqtt_client = AWSIoTMQTTClient(client_id)
 rpi_mqtt_client.configureEndpoint(MQTT_HOST, MQTT_PORT)
