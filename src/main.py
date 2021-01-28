@@ -20,7 +20,7 @@ moisture_pin = 5
 uv_pin = 16
 device_id = 'ef720fc0-20ca-4485-92fe-c95c67ee9307'
 measurement_id = ""
-action_type = ''
+action_type = 'measurement'
 received_dev_id = ''
 received_variable = ''
 
