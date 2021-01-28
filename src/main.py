@@ -95,10 +95,10 @@ rpi_mqtt_client.configureEndpoint(MQTT_HOST, MQTT_PORT)
 rpi_mqtt_client.configureCredentials(CA_ROOT_CERT_FILE, THING_PRIVATE_KEY, THING_CERT_FILE)
 
 rpi_mqtt_client.configureAutoReconnectBackoffTime(1, 32, 20)
-rpi_mqtt_client.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
-rpi_mqtt_client.configureDrainingFrequency(2)  # Draining: 2 Hz
-rpi_mqtt_client.configureConnectDisconnectTimeout(10)  # 10 sec
-rpi_mqtt_client.configureMQTTOperationTimeout(10)  
+rpi_mqtt_client.configureOfflinePublishQueueing(-1)
+rpi_mqtt_client.configureDrainingFrequency(2)
+rpi_mqtt_client.configureConnectDisconnectTimeout(30)
+rpi_mqtt_client.configureMQTTOperationTimeout(30)  
 
 rpi_mqtt_client.connect()
 
