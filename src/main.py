@@ -107,7 +107,7 @@ while True:
     if action_type == "measurement":
         if received_variable == "temperature":
             post_meas(get_temperature())
-            myAWSIoTMQTTClient.publish(MQTT_TOPIC, "Temperature Sent", 1)
+            rpi_mqtt_client.publish(MQTT_TOPIC, "Temperature Sent", 1)
             action_type == ""
         if received_variable == "humidity":
             post_meas(get_humidity())
