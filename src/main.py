@@ -99,7 +99,7 @@ rpi_mqtt_client.configureMQTTOperationTimeout(10)
 
 rpi_mqtt_client.connect()
 
-print(loopCount)
+#print(loopCount)
 while True:
     print(action_type)
     rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
