@@ -108,7 +108,9 @@ while True:
         if received_variable == "temperature":
             post_meas(get_temperature())
             rpi_mqtt_client.publish(MQTT_TOPIC, "Temperature Sent", 1)
-            action_type == ""
+            action_type = ''
+            received_variable = ''
+            received_dev_id = ''
         if received_variable == "humidity":
             post_meas(get_humidity())
         if received_variable == "moisture":
