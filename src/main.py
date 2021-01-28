@@ -21,9 +21,13 @@ uv_pin = 16
 device_id = 'ef720fc0-20ca-4485-92fe-c95c67ee9307'
 measurement_id = ""
 
-global action_type
+global action_type 
 global received_dev_id
 global received_variable
+
+action_type = ''
+received_dev_id = ''
+received_variable = ''
 
 def post_schedule():
     if request.method == 'POST':
@@ -99,7 +103,6 @@ rpi_mqtt_client.configureMQTTOperationTimeout(10)
 rpi_mqtt_client.connect()
 
 while True:
-    print(action_type)
     rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
     if action_type == "measurement":
         if received_variable == "temperature":
