@@ -20,7 +20,7 @@ moisture_pin = 5
 uv_pin = 16
 device_id = 'ef720fc0-20ca-4485-92fe-c95c67ee9307'
 measurement_id = ""
-action_type = 'measurement'
+action_type = ''
 received_dev_id = ''
 received_variable = ''
 
@@ -80,9 +80,9 @@ def customCallback(client, userdata, msg):
     json_action = json.loads(msg.payload)
     action_type = str(json_action["action_type"])
     print(action_type)
-    received_dev_id = json_action["device_id"]
+    received_dev_id = str(json_action["device_id"])
     print(received_dev_id)
-    received_variable = json_action["variable"]
+    received_variable = str(json_action["variable"])
     print(received_variable)
 
 print("hello")
@@ -99,7 +99,6 @@ rpi_mqtt_client.configureMQTTOperationTimeout(10)
 
 rpi_mqtt_client.connect()
 
-#print(loopCount)
 while True:
     print(action_type)
     rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
@@ -108,7 +107,7 @@ while True:
             post_meas(get_temperature())
             myAWSIoTMQTTClient.publish(MQTT_TOPIC, "Temperature Sent", 1)
             action_type == ""
-        if received_varaible == "humidity":
+        if received_variable == "humidity":
             post_meas(get_humidity())
         if received_variable == "moisture":
             post_meas(get_moisture())
