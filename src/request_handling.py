@@ -10,7 +10,7 @@ def post_meas(meas_json):
     topic = os.getenv("POST_TOPIC")
    
     # Obtain JSON file of temperature and other fields
-    data_json = meas_json
+    data_json = json.loads(meas_json)
 
     # Create url based on AWS IoT Core HTTPS endpoint doc
     post_url_test = 'http://api.cultiv.ai/api/data/measurement/'
