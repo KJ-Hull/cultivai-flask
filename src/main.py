@@ -21,6 +21,10 @@ uv_pin = 16
 device_id = 'ef720fc0-20ca-4485-92fe-c95c67ee9307'
 measurement_id = ""
 
+global action_type
+global received_dev_id
+global received_variable
+
 def post_schedule():
     if request.method == 'POST':
         req_data = request.get_json()
@@ -74,9 +78,6 @@ MQTT_HOST = os.getenv('THING_HOST')
 print(MQTT_HOST)
 
 def customCallback(client, userdata, msg):
-    global action_type
-    global received_dev_id
-    global received_variable
     json_action = json.loads(msg.payload)
     action_type = str(json_action["action_type"])
     print(action_type)
