@@ -107,6 +107,7 @@ while True:
     if action_type == "measurement":
         if received_variable == "temperature":
             post_meas(get_temperature())
+            print("Temperature Sent")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
