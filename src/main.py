@@ -107,7 +107,7 @@ rpi_mqtt_client.connect()
 
 while True:
     #rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customPostCallback)
-    rpi_mqtt_client.subscribe(MQTT_MASTER_TOPIC, 1, customMasterCallback)
+    rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
     if action_type == "measurement":
         if received_variable == "temperature":
             post_meas(get_temperature())
