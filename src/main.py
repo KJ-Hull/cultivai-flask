@@ -91,7 +91,7 @@ def customPostCallback(client, userdata, msg):
     print(received_variable)
 
 def customMasterCallback(client, userdata, msg):
-    Print("Received Master Action")
+    print("Received Master Action")
 
 rpi_mqtt_client = AWSIoTMQTTClient(client_id)
 rpi_mqtt_client.configureEndpoint(MQTT_HOST, MQTT_PORT)
