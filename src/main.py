@@ -64,7 +64,7 @@ def get_uv():
 
 MQTT_PORT = 8883
 MQTT_KEEPALIVE_INTERVAL = 45
-
+MQTT_MASTER_TOPIC = "MASTER"
 env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
 
@@ -78,7 +78,7 @@ MQTT_ENDPOINT = os.getenv("ENDPOINT")
 MQTT_HOST = os.getenv('THING_HOST')
 print(MQTT_HOST)
 
-def customCallback(client, userdata, msg):
+def customPostCallback(client, userdata, msg):
     global action_type 
     global received_dev_id
     global received_variable
@@ -89,6 +89,9 @@ def customCallback(client, userdata, msg):
     print(received_dev_id)
     received_variable = str(json_action["variable"])
     print(received_variable)
+
+def customMasterCallback(client, userdata, msg):
+    Print("Received Master Action")
 
 rpi_mqtt_client = AWSIoTMQTTClient(client_id)
 rpi_mqtt_client.configureEndpoint(MQTT_HOST, MQTT_PORT)
@@ -104,6 +107,7 @@ rpi_mqtt_client.connect()
 
 while True:
     rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customCallback)
+    rpi_mqtt_client.subscribe(MQTT_MASTER_TOPIC, 1, customCallback)
     if action_type == "measurement":
         if received_variable == "temperature":
             post_meas(get_temperature())
