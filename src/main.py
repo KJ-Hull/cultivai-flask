@@ -48,7 +48,7 @@ def customPostCallback(client, userdata, msg):
     MQTT_action(action_type, received_variable, received_dev_id, pin)
 
 def customMasterCallback(client, userdata, msg):
-    print("Received Master Action")
+    print("MASTER ACTION: \n")
     global action_type 
     global received_dev_id
     global received_variable

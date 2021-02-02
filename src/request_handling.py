@@ -38,7 +38,7 @@ def payload_handling(payload):
     print(received_dev_id)
     received_variable = str(json_action["variable"])
     print(received_variable)
-    pin = 0
+    pin = 17
     if received_variable == "temperature" or received_variable == "humidity":
         pin = 17
     if received_variable == "uv":
@@ -46,7 +46,6 @@ def payload_handling(payload):
     if received_variable == "moisture":
         pin = 5
 
-    print(pin)
     return action_type, received_dev_id, received_variable, pin
     
 
