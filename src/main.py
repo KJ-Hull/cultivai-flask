@@ -6,7 +6,7 @@ import ssl
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
-from control import set_status, get_status, get_temp, get_humid, get_moist, get_uv_light
+from control import set_status, get_status, get_temp, get_humid, get_moist, get_uv_light, get_temperature, get_humidity, get_moisture, get_uv, post_schedule
 import RPi.GPIO as GPIO
 import requests
 from datetime import timedelta, datetime
@@ -23,43 +23,6 @@ measurement_id = ""
 action_type = ''
 received_dev_id = ''
 received_variable = ''
-
-
-def post_schedule():
-    if request.method == 'POST':
-        req_data = request.get_json()
-        with open('schedule.json', 'w') as outfile:
-            json.dump(req_data, outfile)
-
-        return jsonify(req_data)
-    else:
-        with open('schedule.json') as f:
-            data = json.load(f)
-        return jsonify(data)
-
-def get_temperature():
-    temperature = get_temp(temp_hum_pin)
-    name = "temperature"
-    json_temp = {"variable":name, "value":str(temperature),"device_id":device_id}
-    return json.dumps(json_temp)
-
-def get_humidity():
-    humidity = get_humid(temp_hum_pin)
-    name = "humidity"
-    json_humid= {"variable":name, "value":str(humidity),"device_id":device_id}
-    return json.dumps(json_humid)
-
-def get_moisture():
-    moisture = get_moist(moisture_pin)
-    name = "moisture"
-    json_moist= {"variable":name, "value":moisture,"device_id":device_id}
-    return json.dumps(json_moist)
-    
-def get_uv():
-    uv = get_uv_light(uv_pin)
-    name = "uv"
-    json_uv= {"variable":name, "value":uv,"device_id":device_id}
-    return json.dumps(json_uv)
 
 MQTT_PORT = 8883
 MQTT_KEEPALIVE_INTERVAL = 45

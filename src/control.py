@@ -86,6 +86,42 @@ def get_uv_light(pin):
                 break
     return UV_state
 
+def post_schedule():
+    if request.method == 'POST':
+        req_data = request.get_json()
+        with open('schedule.json', 'w') as outfile:
+            json.dump(req_data, outfile)
+
+        return jsonify(req_data)
+    else:
+        with open('schedule.json') as f:
+            data = json.load(f)
+        return jsonify(data)
+
+def get_temperature():
+    temperature = get_temp(temp_hum_pin)
+    name = "temperature"
+    json_temp = {"variable":name, "value":str(temperature),"device_id":device_id}
+    return json.dumps(json_temp)
+
+def get_humidity():
+    humidity = get_humid(temp_hum_pin)
+    name = "humidity"
+    json_humid= {"variable":name, "value":str(humidity),"device_id":device_id}
+    return json.dumps(json_humid)
+
+def get_moisture():
+    moisture = get_moist(moisture_pin)
+    name = "moisture"
+    json_moist= {"variable":name, "value":moisture,"device_id":device_id}
+    return json.dumps(json_moist)
+    
+def get_uv():
+    uv = get_uv_light(uv_pin)
+    name = "uv"
+    json_uv= {"variable":name, "value":uv,"device_id":device_id}
+    return json.dumps(json_uv)
+
     
 
 
