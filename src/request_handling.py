@@ -45,7 +45,7 @@ def payload_handling(payload):
         pin = 16
     if received_variable == "moisture":
         pin = 5
-    return action_type, received_device_id, received_variable, pin
+    return action_type, received_dev_id, received_variable, pin
     
 
 def MQTT_action(action_type, received_variable, received_dev_id, pin):
