@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-import time
 import subprocess
 import sys, json
 import time
@@ -41,8 +40,8 @@ def get_status(pin):
 def get_temp(pin):
     timeout = time.time() + 1
     while True:
+        time.sleep(1)
         humidity, temperature = measure(pin)
-        print(temperature)
         if temperature is not None or time.time() > timeout:
             print(temperature)
             break
