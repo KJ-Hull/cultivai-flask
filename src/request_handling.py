@@ -45,6 +45,8 @@ def payload_handling(payload):
         pin = 16
     if received_variable == "moisture":
         pin = 5
+
+    print(pin)
     return action_type, received_dev_id, received_variable, pin
     
 
