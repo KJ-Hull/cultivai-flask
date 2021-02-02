@@ -2,7 +2,7 @@ import requests
 from dotenv import load_dotenv
 import os
 import json
-from control import set_status, get_status, get_temp, get_humid, get_moist, get_uv_light, get_temperature, get_humidity, get_moisture, get_uv, post_schedule
+from control import get_temperature, get_humidity, get_moisture, get_uv, post_schedule
 env_dir = "/home/pi/device_var.env"
 
 def post_meas(meas_json):
