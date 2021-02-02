@@ -12,7 +12,7 @@ import requests
 from datetime import timedelta, datetime
 import uuid
 import time
-from request_handling import post_meas, MQTT_action
+from request_handling import post_meas, MQTT_action, payload_handling
 
 temp_hum_pin = 17
 moisture_pin = 5
@@ -44,25 +44,16 @@ def customPostCallback(client, userdata, msg):
     global action_type 
     global received_dev_id
     global received_variable
-    json_action = json.loads(msg.payload)
-    action_type = str(json_action["action_type"])
-    print(action_type)
-    received_dev_id = str(json_action["device_id"])
-    print(received_dev_id)
-    received_variable = str(json_action["variable"])
-    print(received_variable)
-    MQTT_action(action_type, received_variable, received_dev_id)
+    action_type, received_dev_id, received_variable, pin = payload_handling(msg.payload)
+    MQTT_action(action_type, received_variable, received_dev_id, pin)
 
 def customMasterCallback(client, userdata, msg):
     print("Received Master Action")
     global action_type 
     global received_dev_id
     global received_variable
-    json_action = json.loads(msg.payload)
-    action_type = str(json_action["action_type"])
-    received_dev_id = str(json_action["device_id"])
-    received_variable = str(json_action["variable"])
-    MQTT_action(action_type, received_variable, received_dev_id)
+    action_type, received_dev_id, received_variable, pin = payload_handling(msg.payload)
+    MQTT_action(action_type, received_variable, received_dev_id, pin)
 
 rpi_mqtt_client = AWSIoTMQTTClient(client_id)
 rpi_mqtt_client.configureEndpoint(MQTT_HOST, MQTT_PORT)
