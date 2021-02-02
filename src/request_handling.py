@@ -2,7 +2,7 @@ import requests
 from dotenv import load_dotenv
 import os
 import json
-from control import get_temperature, get_humidity, get_moisture, get_uv, post_schedule
+from control import get_humid, get_temperature, get_humidity, get_moisture, get_uv, post_schedule
 env_dir = "/home/pi/device_var.env"
 temp_hum_pin = 17
 moisture_pin = 5
