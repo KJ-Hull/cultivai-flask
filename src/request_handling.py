@@ -54,25 +54,25 @@ def MQTT_action(action_type, received_variable, received_dev_id, pin):
     if action_type == "measurement":
         if received_variable == "temperature":
             post_meas(get_temperature(pin))
-            print("Temperature Sent")
+            print("Temperature Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "humidity":
             post_meas(get_humidity(pin))
-            print("Humidity Sent")
+            print("Humidity Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "moisture":
             post_meas(get_moisture(pin))
-            print("Moisture Sent")
+            print("Moisture Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "uv":
             post_meas(get_uv(pin))
-            print("UV Sent")
+            print("UV Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''

@@ -105,7 +105,6 @@ def post_schedule():
 def get_temperature(temp_hum_pin):
     global device_id
     temperature = get_temp(temp_hum_pin)
-    print(temperature)
     name = "temperature"
     json_temp = {"variable":name, "value":str(temperature),"device_id":device_id}
     return json.dumps(json_temp)
