@@ -42,6 +42,7 @@ def get_temp(pin):
     timeout = time.time() + 1
     while True:
         humidity, temperature = measure(pin)
+        print(temperature)
         if temperature is not None or time.time() > timeout:
             print(temperature)
             break
