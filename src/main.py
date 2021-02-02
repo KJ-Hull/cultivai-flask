@@ -2,7 +2,6 @@ import json
 import requests
 from dotenv import load_dotenv
 import os
-import paho.mqtt.client as mqtt
 import ssl
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
@@ -13,7 +12,7 @@ import requests
 from datetime import timedelta, datetime
 import uuid
 import time
-from request_handling import post_meas
+from request_handling import post_meas, MQTT_action
 
 temp_hum_pin = 17
 moisture_pin = 5
@@ -89,9 +88,18 @@ def customPostCallback(client, userdata, msg):
     print(received_dev_id)
     received_variable = str(json_action["variable"])
     print(received_variable)
+    MQTT_action(action_type, received_variable, received_dev_id)
 
 def customMasterCallback(client, userdata, msg):
     print("Received Master Action")
+    global action_type 
+    global received_dev_id
+    global received_variable
+    json_action = json.loads(msg.payload)
+    action_type = str(json_action["action_type"])
+    received_dev_id = str(json_action["device_id"])
+    received_variable = str(json_action["variable"])
+    MQTT_action(action_type, received_variable, received_dev_id)
 
 rpi_mqtt_client = AWSIoTMQTTClient(client_id)
 rpi_mqtt_client.configureEndpoint(MQTT_HOST, MQTT_PORT)
@@ -108,31 +116,6 @@ rpi_mqtt_client.connect()
 while True:
     rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customPostCallback)
     rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
-    if action_type == "measurement":
-        if received_variable == "temperature":
-            post_meas(get_temperature())
-            print("Temperature Sent")
-            action_type = ''
-            received_variable = ''
-            received_dev_id = ''
-        if received_variable == "humidity":
-            post_meas(get_humidity())
-            print("Humidity Sent")
-            action_type = ''
-            received_variable = ''
-            received_dev_id = ''
-        if received_variable == "moisture":
-            post_meas(get_moisture())
-            print("Moisture Sent")
-            action_type = ''
-            received_variable = ''
-            received_dev_id = ''
-        if received_variable == "uv":
-            post_meas(get_uv())
-            print("UV Sent")
-            action_type = ''
-            received_variable = ''
-            received_dev_id = ''
     time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())

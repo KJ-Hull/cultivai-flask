@@ -27,5 +27,32 @@ def post_meas(meas_json):
     if publish.status_code == 200:
         print("Response body:", publish.text)
 
+def MQTT_action(action_type, received_variable, received_dev_id):
+    if action_type == "measurement":
+        if received_variable == "temperature":
+            post_meas(get_temperature())
+            print("Temperature Sent")
+            action_type = ''
+            received_variable = ''
+            received_dev_id = ''
+        if received_variable == "humidity":
+            post_meas(get_humidity())
+            print("Humidity Sent")
+            action_type = ''
+            received_variable = ''
+            received_dev_id = ''
+        if received_variable == "moisture":
+            post_meas(get_moisture())
+            print("Moisture Sent")
+            action_type = ''
+            received_variable = ''
+            received_dev_id = ''
+        if received_variable == "uv":
+            post_meas(get_uv())
+            print("UV Sent")
+            action_type = ''
+            received_variable = ''
+            received_dev_id = ''
+
 
 
