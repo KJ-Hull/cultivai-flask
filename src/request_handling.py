@@ -7,10 +7,11 @@ env_dir = "/home/pi/device_var.env"
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
-device_id = str(os.getenv("DEVICE_ID"))
+
 def post_meas(meas_json):
     load_dotenv(env_dir)
     endpoint = os.getenv("ENDPOINT")
+    device_id = str(os.getenv("DEVICE_ID"))
     topic = device_id + "/Post"
    
     # Obtain JSON file of temperature and other fields
