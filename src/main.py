@@ -19,7 +19,7 @@ moisture_pin = 5
 uv_pin = 16
 device_id = str(os.getenv("DEVICE_ID"))
 measurement_id = ""
-
+print(device_id)
 action_type = ''
 received_dev_id = ''
 received_variable = ''
