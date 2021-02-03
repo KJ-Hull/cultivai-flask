@@ -22,7 +22,7 @@ def post_meas(meas_json):
     # Make request
     publish = requests.request('POST',
             post_url,
-            data=data_json, 
+            data=json.dumps(data_json), 
             cert=[str(os.getenv("CERT")), str(os.getenv("PRIV_KEY"))])
 
     # Print results, checking what response code is received
