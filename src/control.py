@@ -106,7 +106,7 @@ def get_temperature(temp_hum_pin):
     global device_id
     temperature = get_temp(temp_hum_pin)
     name = "temperature"
-    json_temp = {"variable":name, "value":str(temperature),"device_id":device_id}
+    json_temp = {"variable":name, "value":str(temperature),"device_id":"ef720fc0-20ca-4485-92fe-c95c67ee9307"}
     return json.dumps(json_temp)
 
 def get_humidity(temp_hum_pin):
