@@ -3,6 +3,7 @@ import subprocess
 import sys, json
 import time
 from dotenv import load_dotenv
+import os
 
 def install(package):
     subprocess.call([sys.executable, "-m", "pip", "install", package])
