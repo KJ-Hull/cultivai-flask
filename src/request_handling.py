@@ -7,23 +7,22 @@ env_dir = "/home/pi/device_var.env"
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
+device_id = str(os.environ.get("DEVICE_ID"))
 def post_meas(meas_json):
     load_dotenv(env_dir)
     endpoint = os.getenv("ENDPOINT")
-    topic = os.getenv("POST_TOPIC")
+    topic = device_id + "/Post"
    
     # Obtain JSON file of temperature and other fields
     data_json = json.loads(meas_json)
-
+    endpoint = str(os.environ.get("ENDPOINT"))
     # Create url based on AWS IoT Core HTTPS endpoint doc
-    post_url_test = 'http://api.cultiv.ai/api/data/measurement/'
-    login_headers = 'Api-Key ' + str(os.environ.get("API_KEY"))
-    print(login_headers)
+    post_url = 'https://'+ endpoint + ':8443/topics/' + topic + '?qos=1'
     # Make request
     publish = requests.request('POST',
-            post_url_test,
-            data=data_json,
-            headers = {'Authorization':login_headers})
+            post_url,
+            data=data_json, 
+            cert=[str(os.environ.get("CERT")), str(os.environ.get("PRIV_KEY"))])
 
     # Print results, checking what response code is received
     print("Response status: ", str(publish.status_code))

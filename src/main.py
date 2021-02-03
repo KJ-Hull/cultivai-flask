@@ -17,7 +17,7 @@ from request_handling import post_meas, MQTT_action, payload_handling
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
-device_id = 'ef720fc0-20ca-4485-92fe-c95c67ee9307'
+device_id = str(os.environs.get("DEVICE_ID"))
 measurement_id = ""
 
 action_type = ''
@@ -30,15 +30,12 @@ MQTT_MASTER_TOPIC = "MASTER"
 env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
 
-client_id = "RPI_device"
-MQTT_TOPIC = os.getenv("GET_TOPIC")
+client_id = "RPI_device"   #This needs to be the device's unique ID
+MQTT_TOPIC = device_id + "/Post"
 CA_ROOT_CERT_FILE = os.getenv("CA")
 THING_CERT_FILE = os.getenv("CERT")
 THING_PRIVATE_KEY = os.getenv("PRIV_KEY")
 MQTT_ENDPOINT = os.getenv("ENDPOINT")
-
-MQTT_HOST = os.getenv('THING_HOST')
-print(MQTT_HOST)
 
 def customPostCallback(client, userdata, msg):
     global action_type 
@@ -69,7 +66,9 @@ rpi_mqtt_client.connect()
 
 while True:
     rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customPostCallback)
+    print("Subscribed to " + MQTT_TOPIC)
     rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
+    print("Subscribed to Master")
     time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
