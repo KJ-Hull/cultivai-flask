@@ -19,7 +19,7 @@ moisture_pin = 5
 uv_pin = 16
 
 measurement_id = ""
-print(device_id)
+
 action_type = ''
 received_dev_id = ''
 received_variable = ''
@@ -30,6 +30,7 @@ MQTT_MASTER_TOPIC = "MASTER"
 env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
 device_id = str(os.getenv("DEVICE_ID"))
+print(device_id)
 MQTT_HOST = os.getenv("THING_HOST")
 client_id = "RPI_device"   #This needs to be the device's unique ID
 MQTT_TOPIC = device_id + "/Get"
