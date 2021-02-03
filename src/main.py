@@ -43,8 +43,12 @@ def customPostCallback(client, userdata, msg):
     global action_type 
     global received_dev_id
     global received_variable
+    global device_id
     action_type, received_dev_id, received_variable, pin = payload_handling(msg.payload)
-    MQTT_action(action_type, received_variable, received_dev_id, pin)
+    if received_dev_id == device_id:
+        MQTT_action(action_type, received_variable, received_dev_id, pin)
+    else:
+        print("Action not executed. Device ID mismatch.")
 
 def customMasterCallback(client, userdata, msg):
     print("MASTER ACTION: \n")
@@ -52,7 +56,10 @@ def customMasterCallback(client, userdata, msg):
     global received_dev_id
     global received_variable
     action_type, received_dev_id, received_variable, pin = payload_handling(msg.payload)
-    MQTT_action(action_type, received_variable, received_dev_id, pin)
+    if received_dev_id == device_id:
+        MQTT_action(action_type, received_variable, received_dev_id, pin)
+    else:
+        print("Action not executed. Device ID mismatch.")
 
 rpi_mqtt_client = AWSIoTMQTTClient(client_id)
 rpi_mqtt_client.configureEndpoint(MQTT_HOST, MQTT_PORT)
