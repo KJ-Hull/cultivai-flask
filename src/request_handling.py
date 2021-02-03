@@ -7,7 +7,7 @@ env_dir = "/home/pi/device_var.env"
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
-device_id = str(os.environ.get("DEVICE_ID"))
+device_id = str(os.getenv("DEVICE_ID"))
 def post_meas(meas_json):
     load_dotenv(env_dir)
     endpoint = os.getenv("ENDPOINT")
@@ -15,14 +15,14 @@ def post_meas(meas_json):
    
     # Obtain JSON file of temperature and other fields
     data_json = json.loads(meas_json)
-    endpoint = str(os.environ.get("ENDPOINT"))
+    endpoint = str(os.getenv("ENDPOINT"))
     # Create url based on AWS IoT Core HTTPS endpoint doc
     post_url = 'https://'+ endpoint + ':8443/topics/' + topic + '?qos=1'
     # Make request
     publish = requests.request('POST',
             post_url,
             data=data_json, 
-            cert=[str(os.environ.get("CERT")), str(os.environ.get("PRIV_KEY"))])
+            cert=[str(os.getenv("CERT")), str(os.getenv("PRIV_KEY"))])
 
     # Print results, checking what response code is received
     print("Response status: ", str(publish.status_code))

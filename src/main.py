@@ -17,7 +17,7 @@ from request_handling import post_meas, MQTT_action, payload_handling
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
-device_id = str(os.environs.get("DEVICE_ID"))
+device_id = str(os.getenv("DEVICE_ID"))
 measurement_id = ""
 
 action_type = ''
