@@ -31,7 +31,7 @@ env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
 
 client_id = "RPI_device"   #This needs to be the device's unique ID
-MQTT_TOPIC = device_id + "/Post"
+MQTT_TOPIC = device_id + "/Get"
 CA_ROOT_CERT_FILE = os.getenv("CA")
 THING_CERT_FILE = os.getenv("CERT")
 THING_PRIVATE_KEY = os.getenv("PRIV_KEY")
