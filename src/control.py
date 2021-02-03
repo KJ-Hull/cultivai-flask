@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import subprocess
 import sys, json
 import time
+from dotenv import load_dotenv
 
 def install(package):
     subprocess.call([sys.executable, "-m", "pip", "install", package])
@@ -22,7 +23,9 @@ GPIO.setup(16, GPIO.IN)
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
-device_id = '1234'
+env_dir = "/home/pi/device_var.env"
+load_dotenv(env_dir)
+device_id = str(os.getenv("DEVICE_ID"))
 def measure(pin):
     return Adafruit_DHT.read(Adafruit_DHT.DHT11, pin)
 
@@ -106,7 +109,7 @@ def get_temperature(temp_hum_pin):
     global device_id
     temperature = get_temp(temp_hum_pin)
     name = "temperature"
-    json_temp = {"variable":name, "value":str(temperature),"device_id":"ef720fc0-20ca-4485-92fe-c95c67ee9307"}
+    json_temp = {"variable":name, "value":str(temperature),"device_id":device_id}
     return json.dumps(json_temp)
 
 def get_humidity(temp_hum_pin):
