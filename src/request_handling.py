@@ -12,7 +12,8 @@ uv_pin = 16
 device_mqtt_client = ''
 
 def dev_publish_init(mqtt_client):
-    global device_mqtt_client = mqtt_client
+    global device_mqtt_client
+    device_mqtt_client = mqtt_client
 
 def post_meas(meas_json):
     client = device_mqtt_client
