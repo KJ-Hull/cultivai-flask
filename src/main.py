@@ -85,9 +85,6 @@ rpi_mqtt_client.configureConnectDisconnectTimeout(30)
 rpi_mqtt_client.configureMQTTOperationTimeout(30)  
 
 rpi_mqtt_client.connect()
-for i in range(1000):
-    rpi_mqtt_client.publish('testtopic', str(i), 0)
-
 dev_publish_init(rpi_mqtt_client)
 while True:
     attempts_action = 3
