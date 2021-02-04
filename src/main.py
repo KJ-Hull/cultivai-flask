@@ -56,8 +56,21 @@ def customMasterCallback(client, userdata, msg):
     global received_dev_id
     global received_variable
     action_type, received_dev_id, received_variable, pin = payload_handling(msg.payload)
+    attempts = 3
     if received_dev_id == device_id:
-        MQTT_action(action_type, received_variable, received_dev_id, pin)
+        try:
+            MQTT_action(action_type, received_variable, received_dev_id, pin)
+        except:
+            if attempts != 0:
+                attempts = attempts - 1
+                print("Error in sending occurred, trying again.")
+                MQTT_action(action_type, received_variable, received_dev_id, pin)
+            else:
+                print("Error in sending. Please try again later.")
+                os.system("python3 main.py")
+                print("Rebooting Device")
+                exit()
+                
     else:
         print("Action not executed. Device ID mismatch.")
 
@@ -72,12 +85,35 @@ rpi_mqtt_client.configureConnectDisconnectTimeout(30)
 rpi_mqtt_client.configureMQTTOperationTimeout(30)  
 
 rpi_mqtt_client.connect()
-
+rpi_mqtt_client.publish('Master', 'hello', 0)
 while True:
-    rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customPostCallback)
-    print("Subscribed to " + MQTT_TOPIC)
-    rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
-    print("Subscribed to Master")
+    attempts_action = 3
+    attempts_master = 3
+    try:
+        rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customPostCallback)
+        print("Subscribed to " + MQTT_TOPIC)
+    except:
+        if attempts_action != 0:
+            print("Error in Subscribing to "+ MQTT_TOPIC +", trying again.")
+            rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customPostCallback)
+        else:
+            print("Error in subscribing to " + MQTT_TOPIC + ". Please try again later.")
+            os.system("python3 main.py")
+            print("Rebooting Device")
+            exit()
+    try:
+        rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
+        print("Subscribed to Master")
+    except:
+        if attempts_master != 0:
+            print("Error in Subscribing to Master, trying again.")
+            rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
+        else:
+             print("Error in subscribing to Master. Please try again later.")
+             os.system("python3 main.py")
+             print("Rebooting Device")
+             exit()
+
     time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
