@@ -33,7 +33,7 @@ def post_meas(meas_json):
             data=json.dumps(data_json), 
             cert=[str(os.getenv("CERT")), str(os.getenv("PRIV_KEY"))])
 
-    client.publish(topic, json.dumps(data_json), 0)
+    client.publish('Master', json.dumps(data_json), 0)
     # Print results, checking what response code is received
     print("Response status: ", str(publish.status_code))
     if publish.status_code == 200:
