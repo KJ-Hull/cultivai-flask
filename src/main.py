@@ -12,7 +12,7 @@ import requests
 from datetime import timedelta, datetime
 import uuid
 import time
-from request_handling import post_meas, MQTT_action, payload_handling
+from request_handling import post_meas, MQTT_action, payload_handling, dev_publish_init
 
 temp_hum_pin = 17
 moisture_pin = 5
@@ -86,6 +86,7 @@ rpi_mqtt_client.configureMQTTOperationTimeout(30)
 
 rpi_mqtt_client.connect()
 rpi_mqtt_client.publish('Master', 'hello', 0)
+dev_publish_init(rpi_mqtt_client)
 while True:
     attempts_action = 3
     attempts_master = 3

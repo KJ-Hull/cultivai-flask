@@ -3,12 +3,19 @@ from dotenv import load_dotenv
 import os
 import json
 from control import get_humid, get_temperature, get_humidity, get_moisture, get_uv, post_schedule
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+
 env_dir = "/home/pi/device_var.env"
 temp_hum_pin = 17
 moisture_pin = 5
 uv_pin = 16
+device_mqtt_client = ''
+
+def dev_publish_init(mqtt_client):
+    global device_mqtt_client = mqtt_client
 
 def post_meas(meas_json):
+    client = device_mqtt_client
     load_dotenv(env_dir)
     endpoint = os.getenv("ENDPOINT")
     device_id = str(os.getenv("DEVICE_ID"))
@@ -25,6 +32,7 @@ def post_meas(meas_json):
             data=json.dumps(data_json), 
             cert=[str(os.getenv("CERT")), str(os.getenv("PRIV_KEY"))])
 
+    client.publish(topic, json.dumps(data_json), 0)
     # Print results, checking what response code is received
     print("Response status: ", str(publish.status_code))
     if publish.status_code == 200:
