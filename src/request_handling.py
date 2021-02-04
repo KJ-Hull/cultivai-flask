@@ -18,26 +18,12 @@ def dev_publish_init(mqtt_client):
 def post_meas(meas_json):
     client = device_mqtt_client
     load_dotenv(env_dir)
-    endpoint = os.getenv("ENDPOINT")
     device_id = str(os.getenv("DEVICE_ID"))
-    topic = device_id + "/Post"
-   
-    # Obtain JSON file of temperature and other fields
+    topic = device_id + '/Post'
     data_json = json.loads(meas_json)
-    endpoint = str(os.getenv("ENDPOINT"))
-    # Create url based on AWS IoT Core HTTPS endpoint doc
-    post_url = 'https://'+ endpoint + ':8443/topics/' + topic + '?qos=1'
-    # Make request
-    publish = requests.request('POST',
-            post_url,
-            data=json.dumps(data_json), 
-            cert=[str(os.getenv("CERT")), str(os.getenv("PRIV_KEY"))])
+    client.publish(topic, json.dumps(data_json), 0)
 
-    client.publish('Master', json.dumps(data_json), 0)
-    # Print results, checking what response code is received
-    print("Response status: ", str(publish.status_code))
-    if publish.status_code == 200:
-        print("Response body:", publish.text)
+  
 
 def payload_handling(payload):
     json_action = json.loads(payload)
