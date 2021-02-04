@@ -23,8 +23,6 @@ def post_meas(meas_json):
     data_json = json.loads(meas_json)
     client.publish(topic, json.dumps(data_json), 0)
 
-  
-
 def payload_handling(payload):
     json_action = json.loads(payload)
     action_type = str(json_action["action_type"])
