@@ -20,6 +20,7 @@ def post_meas(meas_json, action_type):
     load_dotenv(env_dir)
     device_id = str(os.getenv("DEVICE_ID"))
     topic = device_id + '/Post/' + action_type
+    print(topic)
     data_json = json.loads(meas_json)
     client.publish(topic, json.dumps(data_json), 0)
 
