@@ -46,7 +46,7 @@ def payload_handling(payload):
 def MQTT_action(action_type, received_variable, received_dev_id, pin):
     if action_type == "measurement":
         if received_variable == "temperature":
-            post_meas(get_temperature(pin). action_type)
+            post_meas(get_temperature(pin), action_type)
             print("Temperature Sent \n")
             action_type = ''
             received_variable = ''
