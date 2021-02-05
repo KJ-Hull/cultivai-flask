@@ -86,9 +86,10 @@ rpi_mqtt_client.configureMQTTOperationTimeout(30)
 
 rpi_mqtt_client.connect()
 dev_publish_init(rpi_mqtt_client)
+attempts_action = 3
+attempts_master = 3
+
 while True:
-    attempts_action = 3
-    attempts_master = 3
     try:
         rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customPostCallback)
         print("Subscribed to " + MQTT_TOPIC)
@@ -100,6 +101,7 @@ while True:
             print("Error in subscribing to " + MQTT_TOPIC + ". Please try again later.")
             os.system("python3 main.py")
             print("Rebooting Device")
+            attempts_master = 3
             exit()
     try:
         rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
@@ -112,9 +114,8 @@ while True:
              print("Error in subscribing to Master. Please try again later.")
              os.system("python3 main.py")
              print("Rebooting Device")
+             attempts_master = 3
              exit()
-
-    time.sleep(1)
 
 # s3_aws_init(209, "temp", get_temperature())
    

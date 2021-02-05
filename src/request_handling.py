@@ -15,11 +15,11 @@ def dev_publish_init(mqtt_client):
     global device_mqtt_client
     device_mqtt_client = mqtt_client
 
-def post_meas(meas_json):
+def post_meas(meas_json, action_type):
     client = device_mqtt_client
     load_dotenv(env_dir)
     device_id = str(os.getenv("DEVICE_ID"))
-    topic = device_id + '/Post'
+    topic = device_id + '/Post/' + action_type
     data_json = json.loads(meas_json)
     client.publish(topic, json.dumps(data_json), 0)
 
@@ -45,25 +45,25 @@ def payload_handling(payload):
 def MQTT_action(action_type, received_variable, received_dev_id, pin):
     if action_type == "measurement":
         if received_variable == "temperature":
-            post_meas(get_temperature(pin))
+            post_meas(get_temperature(pin). action_type)
             print("Temperature Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "humidity":
-            post_meas(get_humidity(pin))
+            post_meas(get_humidity(pin), action_type)
             print("Humidity Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "moisture":
-            post_meas(get_moisture(pin))
+            post_meas(get_moisture(pin), action_type)
             print("Moisture Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "uv":
-            post_meas(get_uv(pin))
+            post_meas(get_uv(pin), action_type)
             print("UV Sent \n")
             action_type = ''
             received_variable = ''
