@@ -15,7 +15,7 @@ def dev_publish_init(mqtt_client):
     global device_mqtt_client
     device_mqtt_client = mqtt_client
 
-def post_meas(meas_json, action_type):
+def mqtt_meas(meas_json, action_type):
     client = device_mqtt_client
     load_dotenv(env_dir)
     device_id = str(os.getenv("DEVICE_ID"))
@@ -69,6 +69,13 @@ def MQTT_action(action_type, received_variable, received_dev_id, pin):
             action_type = ''
             received_variable = ''
             received_dev_id = ''
+
+    if action_type == "Update":
+
+    if action_type == "PinState":
+
+    if action_type == "PortChane":
+
 
 
 
