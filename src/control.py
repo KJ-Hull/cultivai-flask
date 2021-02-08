@@ -70,6 +70,7 @@ def get_humid(pin):
 
 def get_moist(pin):
     timeout = time.time() + 1  
+    GPIO.setup(5, GPIO.IN)
     while True:
         moist_pin_state = GPIO.input(pin)
         if moist_pin_state is not None:
@@ -83,6 +84,7 @@ def get_moist(pin):
 
 def get_uv_light(pin):
     timeout = time.time() + 1  
+    GPIO.setup(16, GPIO.IN)
     while True:
         UV_pin_state = GPIO.input(pin)
         if UV_pin_state is not None:
