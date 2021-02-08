@@ -15,10 +15,13 @@ def pin_handling(variable_name):
     if variable_name == "temperature" or variable_name == "humidity":
         print("hello")
         pin = 17
+        return pin
     if variable_name == "uv":
         pin = 16
+        return pin
     if variable_name == "moisture":
         pin = 5
+        return pin
 
 def dev_publish_init(mqtt_client):
     global device_mqtt_client
