@@ -12,7 +12,7 @@ import requests
 from datetime import timedelta, datetime
 import uuid
 import time
-from request_handling import post_meas, MQTT_action, payload_handling, dev_publish_init
+from request_handling import mqtt_meas, MQTT_action, payload_handling, dev_publish_init
 
 temp_hum_pin = 17
 moisture_pin = 5
