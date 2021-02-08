@@ -56,7 +56,9 @@ def get_temp(pin):
     except:
         humidity, temperature = measure(pin)
         temp = round(temperature,2)
-
+    finally:
+        humidity, temperature = measure(pin)
+        temp = round(temperature,2)
     return temp
 
 def get_humid(pin):
@@ -73,6 +75,9 @@ def get_humid(pin):
     try:
         hum = round(humidity,2)
     except:
+        humidity, temperature = measure(pin)
+        hum = round(humidity,2)
+    finally:
         humidity, temperature = measure(pin)
         hum = round(humidity,2)
 
