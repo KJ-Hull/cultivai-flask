@@ -74,10 +74,10 @@ def get_moist(pin):
         moist_pin_state = GPIO.input(pin)
         if moist_pin_state is not None:
             if moist_pin_state:
-                soil_state = 'WET'
+                soil_state = True
                 break
             else:
-                soil_state = 'NOT WET'
+                soil_state = False
                 break
     return soil_state
 
@@ -87,10 +87,10 @@ def get_uv_light(pin):
         UV_pin_state = GPIO.input(pin)
         if UV_pin_state is not None:
             if UV_pin_state:
-                UV_state = 'UV PRESENT'
+                UV_state = True
                 break
             else:
-                UV_state = 'NO UV PRESENT'
+                UV_state = False
                 break
     return UV_state
 
