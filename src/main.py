@@ -60,6 +60,7 @@ def customMasterCallback(client, userdata, msg):
     attempts = 3
     if received_dev_id == device_id:
         try:
+            print("hello")
             pin = pin_handling("temperature")
             MQTT_action(action_type, "temperature", received_dev_id, pin)
             pin = pin_handling("humidity")
