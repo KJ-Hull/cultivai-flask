@@ -70,11 +70,11 @@ def MQTT_action(action_type, received_variable, received_dev_id, pin):
             received_variable = ''
             received_dev_id = ''
 
-    if action_type == "Update":
+    #if action_type == "Update":
 
-    if action_type == "PinState":
+    #if action_type == "PinState":
 
-    if action_type == "PortChane":
+    #if action_type == "PortChane":
 
 
 
