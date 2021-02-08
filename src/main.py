@@ -62,6 +62,7 @@ def customMasterCallback(client, userdata, msg):
         try:
             print("hello")
             pin = pin_handling("temperature")
+            print(pin)
             MQTT_action(action_type, "temperature", received_dev_id, pin)
             pin = pin_handling("humidity")
             MQTT_action(action_type, "humidity", received_dev_id, pin)
