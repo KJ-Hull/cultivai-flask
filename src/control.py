@@ -123,7 +123,7 @@ def get_temperature(temp_hum_pin):
     temperature = get_temp(temp_hum_pin)
     name = "temperature"
     output = get_output_num(name)
-    json_temp = {"variable":output, output:str(temperature),"device_id":device_id}
+    json_temp = {"variable":output, output:str(temperature),"device_id":device_id, "value":str(temperature)}
     return json.dumps(json_temp)
 
 def get_humidity(temp_hum_pin):
@@ -131,7 +131,7 @@ def get_humidity(temp_hum_pin):
     humidity = get_humid(temp_hum_pin)
     name = "humidity"
     output = get_output_num(name)
-    json_humid= {"variable":output, output:str(humidity),"device_id":device_id}
+    json_humid= {"variable":output, output:str(humidity),"device_id":device_id, "value":str(humidity)}
     return json.dumps(json_humid)
 
 def get_moisture(moisture_pin):
@@ -139,7 +139,7 @@ def get_moisture(moisture_pin):
     moisture = get_moist(moisture_pin)
     name = "moisture"
     output = get_output_num(name)
-    json_moist= {"variable":output, output:moisture,"device_id":device_id}
+    json_moist= {"variable":output, output:moisture,"device_id":device_id, "value":str(uv)}
     return json.dumps(json_moist)
     
 def get_uv(uv_pin):
@@ -147,7 +147,7 @@ def get_uv(uv_pin):
     uv = get_uv_light(uv_pin)
     name = "uv"
     output = get_output_num(name)
-    json_uv= {"variable":output, output:uv,"device_id":device_id}
+    json_uv= {"variable":output, output:uv,"device_id":device_id, "value":str(moisture)}
     return json.dumps(json_uv)
 
     
