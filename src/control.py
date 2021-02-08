@@ -111,9 +111,9 @@ def get_output_num(variable_name):
         return "output_1"
     if variable_name == "humidity":
         return "output_2"
-    if variable_name == "uv":
-        return "output_3"
     if variable_name == "moisture":
+        return "output_3"
+    if variable_name == "uv":
         return "output_4"
 
 def get_temperature(temp_hum_pin):
