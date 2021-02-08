@@ -13,7 +13,6 @@ device_mqtt_client = ''
 
 def pin_handling(variable_name):
     if variable_name == "temperature" or variable_name == "humidity":
-        print("hello")
         pin = 17
         return pin
     if variable_name == "uv":
@@ -56,7 +55,7 @@ def payload_handling(payload):
     
 
 def MQTT_action(action_type, received_variable, received_dev_id, pin):
-    if action_type == "Measurement":
+    if action_type == "measurement":
         if received_variable == "temperature":
             mqtt_meas(get_temperature(pin), action_type)
             print("Temperature Sent \n")
