@@ -56,11 +56,11 @@ def customMasterCallback(client, userdata, msg):
     global received_dev_id
     global received_variable
     json_msg = json.loads(msg.payload)
+    action_type = str(json_msg["action_type"])
     received_dev_id = str(json_msg["device_id"])
     attempts = 3
     if received_dev_id == device_id:
         try:
-            print("hello")
             pin = pin_handling("temperature")
             MQTT_action(action_type, "temperature", received_dev_id, pin)
             pin = pin_handling("humidity")
