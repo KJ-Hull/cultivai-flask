@@ -106,32 +106,46 @@ def post_schedule():
             data = json.load(f)
         return jsonify(data)
 
+def get_output_num(variable_name):
+    if variable_name == "temperature":
+        return "output_1"
+    if variable_name == "humidity":
+        return "output_2"
+    if variable_name == "uv":
+        return "output_3"
+    if variable_name == "moisture":
+        return "output_4"
+
 def get_temperature(temp_hum_pin):
     global device_id
     temperature = get_temp(temp_hum_pin)
     name = "temperature"
-    json_temp = {"variable":name, "value":str(temperature),"device_id":device_id}
+    output = get_output_num(name)
+    json_temp = {"variable":name, output:str(temperature),"device_id":device_id}
     return json.dumps(json_temp)
 
 def get_humidity(temp_hum_pin):
     global device_id
     humidity = get_humid(temp_hum_pin)
     name = "humidity"
-    json_humid= {"variable":name, "value":str(humidity),"device_id":device_id}
+    output = get_output_num(name)
+    json_humid= {"variable":name, output:str(humidity),"device_id":device_id}
     return json.dumps(json_humid)
 
 def get_moisture(moisture_pin):
     global device_id
     moisture = get_moist(moisture_pin)
     name = "moisture"
-    json_moist= {"variable":name, "value":moisture,"device_id":device_id}
+    output = get_output_num(name)
+    json_moist= {"variable":name, output:moisture,"device_id":device_id}
     return json.dumps(json_moist)
     
 def get_uv(uv_pin):
     global device_id
     uv = get_uv_light(uv_pin)
     name = "uv"
-    json_uv= {"variable":name, "value":uv,"device_id":device_id}
+    output = get_output_num(name)
+    json_uv= {"variable":name, output:uv,"device_id":device_id}
     return json.dumps(json_uv)
 
     

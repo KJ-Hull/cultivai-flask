@@ -64,7 +64,10 @@ def customMasterCallback(client, userdata, msg):
             if attempts != 0:
                 attempts = attempts - 1
                 print("Error in sending occurred, trying again.")
-                MQTT_action(action_type, received_variable, received_dev_id, pin)
+                MQTT_action(action_type, "temperature", received_dev_id, pin)
+                MQTT_action(action_type, "humidity", received_dev_id, pin)
+                MQTT_action(action_type, "uv", received_dev_id, pin)
+                MQTT_action(action_type, "moisture", received_dev_id, pin)
             else:
                 print("Error in sending. Please try again later.")
                 os.system("python3 main.py")
