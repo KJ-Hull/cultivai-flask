@@ -55,7 +55,7 @@ def customMasterCallback(client, userdata, msg):
     global action_type 
     global received_dev_id
     global received_variable
-    json_msg = json.loads(msg.payload)
+    json_msg = json.dumps(msg.payload)
     received_dev_id = str(msg.payload["device_id"])
     attempts = 3
     if received_dev_id == device_id:
