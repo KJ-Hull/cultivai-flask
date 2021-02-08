@@ -11,6 +11,14 @@ moisture_pin = 5
 uv_pin = 16
 device_mqtt_client = ''
 
+def pin_handling(variable_name):
+    if variable_name == "temperature" or variable_name == "humidity":
+        pin = 17
+    if variable_name == "uv":
+        pin = 16
+    if variable_name == "moisture":
+        pin = 5
+
 def dev_publish_init(mqtt_client):
     global device_mqtt_client
     device_mqtt_client = mqtt_client

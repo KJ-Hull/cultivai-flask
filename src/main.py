@@ -12,7 +12,7 @@ import requests
 from datetime import timedelta, datetime
 import uuid
 import time
-from request_handling import mqtt_meas, MQTT_action, payload_handling, dev_publish_init
+from request_handling import mqtt_meas, MQTT_action, payload_handling, dev_publish_init, pin_handling
 
 temp_hum_pin = 17
 moisture_pin = 5
@@ -55,18 +55,19 @@ def customMasterCallback(client, userdata, msg):
     global action_type 
     global received_dev_id
     global received_variable
-    action_type, received_dev_id, received_variable, pin = payload_handling(msg.payload)
+    received_dev_id = msg.payload["device_id"]
     attempts = 3
     if received_dev_id == device_id:
         try:
+            pin = pin_handling("temperature")
             MQTT_action(action_type, "temperature", received_dev_id, pin)
-            print("hello")
+            pin = pin_handling("humidity")
             MQTT_action(action_type, "humidity", received_dev_id, pin)
-            print("hello")
+            pin = pin_handling("uv")
             MQTT_action(action_type, "uv", received_dev_id, pin)
-            print("hello")
+            pin = pin_handling("moisture")
             MQTT_action(action_type, "moisture", received_dev_id, pin)
-            print("hello")
+            
         except:
             if attempts != 0:
                 attempts = attempts - 1
