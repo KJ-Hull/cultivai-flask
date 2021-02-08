@@ -13,6 +13,7 @@ device_mqtt_client = ''
 
 def pin_handling(variable_name):
     if variable_name == "temperature" or variable_name == "humidity":
+        print("hello")
         pin = 17
     if variable_name == "uv":
         pin = 16
