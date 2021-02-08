@@ -42,31 +42,24 @@ def get_status(pin):
         return False
     
 def get_temp(pin):
-    timeout = time.time() + 1
+    
     while True:
         time.sleep(1)                                       #Gives time for sensor to be initialised. I think the program is operating too quickly for the sensor and is messing with the sys clock
         humidity, temperature = measure(pin)
-        if temperature is not None or time.time() > timeout:
+        if temperature is not None:
             print(temperature)
             break
         else:
             humidity, temperature = measure(pin)
-    try:
-        temp = round(temperature,2)
-    except:
-        humidity, temperature = measure(pin)
-        temp = round(temperature,2)
-    finally:
-        humidity, temperature = measure(pin)
-        temp = round(temperature,2)
+
     return temp
 
 def get_humid(pin):
-    timeout = time.time() + 1  
+    
     while True:
         time.sleep(1)
         humidity, temperature = measure(pin)
-        if humidity is not None or time.time() > timeout:
+        if humidity is not None:
             print(humidity)
             break
         else:
