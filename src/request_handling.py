@@ -46,25 +46,25 @@ def payload_handling(payload):
 def MQTT_action(action_type, received_variable, received_dev_id, pin):
     if action_type == "Measurement":
         if received_variable == "temperature":
-            post_meas(get_temperature(pin), action_type)
+            mqtt_meas(get_temperature(pin), action_type)
             print("Temperature Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "humidity":
-            post_meas(get_humidity(pin), action_type)
+            mqtt_meas(get_humidity(pin), action_type)
             print("Humidity Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "moisture":
-            post_meas(get_moisture(pin), action_type)
+            mqtt_meas(get_moisture(pin), action_type)
             print("Moisture Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "uv":
-            post_meas(get_uv(pin), action_type)
+            mqtt_meas(get_uv(pin), action_type)
             print("UV Sent \n")
             action_type = ''
             received_variable = ''
