@@ -51,7 +51,12 @@ def get_temp(pin):
             break
         else:
             humidity, temperature = measure(pin)
-    temp = round(temperature,2)
+    try:
+        temp = round(temperature,2)
+    except:
+        humidity, temperature = measure(pin)
+        temp = round(temperature,2)
+
     return temp
 
 def get_humid(pin):
@@ -65,14 +70,24 @@ def get_humid(pin):
         else:
             humidity, temperature = measure(pin)
 
-    hum = round(humidity,2)
+    try:
+        hum = round(humidity,2)
+    except:
+        humidity, temperature = measure(pin)
+        hum = round(humidity,2)
+
     return hum
 
 def get_moist(pin):
     timeout = time.time() + 1  
     GPIO.setup(5, GPIO.IN)
     while True:
-        moist_pin_state = GPIO.input(pin)
+        try:
+            moist_pin_state = GPIO.input(pin)
+        except:
+            GPIO.setup(5, GPIO.IN)
+            moist_pin_state = GPIO.input(pin)
+
         if moist_pin_state is not None:
             if moist_pin_state:
                 soil_state = True
