@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 import os
 import json
-from control import get_humid, get_temperature, get_humidity, get_moisture, get_uv, post_schedule
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import temperature
 import moisture

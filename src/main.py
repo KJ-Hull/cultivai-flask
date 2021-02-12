@@ -6,7 +6,6 @@ import ssl
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
 
-from control import set_status, get_status, get_temp, get_humid, get_moist, get_uv_light, get_temperature, get_humidity, get_moisture, get_uv, post_schedule
 import RPi.GPIO as GPIO
 import requests
 from datetime import timedelta, datetime
