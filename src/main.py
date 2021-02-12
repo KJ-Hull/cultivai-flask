@@ -60,14 +60,17 @@ def customMasterCallback(client, userdata, msg):
     attempts = 3
     if received_dev_id == device_id:
         try:
-            pin = pin_handling("temperature")
-            MQTT_action(action_type, "temperature", received_dev_id, pin)
-            pin = pin_handling("humidity")
-            MQTT_action(action_type, "humidity", received_dev_id, pin)
-            pin = pin_handling("uv")
-            MQTT_action(action_type, "uv", received_dev_id, pin)
-            pin = pin_handling("moisture")
-            MQTT_action(action_type, "moisture", received_dev_id, pin)
+            if action_type == "measurement":
+                pin = pin_handling("temperature")
+                MQTT_action(action_type, "temperature", received_dev_id, pin)
+                pin = pin_handling("humidity")
+                MQTT_action(action_type, "humidity", received_dev_id, pin)
+                pin = pin_handling("uv")
+                MQTT_action(action_type, "uv", received_dev_id, pin)
+                pin = pin_handling("moisture")
+                MQTT_action(action_type, "moisture", received_dev_id, pin)
+            if action_type == "update":
+                MQTT_action(action_type, "", received_dev_id, "")
             
         except:
             if attempts != 0:
