@@ -3,12 +3,6 @@ import humidity
 import uv
 import moisture
 
-def get_version():
-
-
-def set_version(sensor):
-
-
 def get_output_num(variable_name):
     if variable_name == "temperature":
         return "output_1"
