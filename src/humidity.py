@@ -3,6 +3,7 @@ version = "0.1.0"
 import RPi.GPIO as GPIO
 import subprocess
 import sys, json
+from dotenv import load_dotenv
 import time
 from control import get_output_num
 

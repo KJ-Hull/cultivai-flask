@@ -4,6 +4,7 @@ import subprocess
 import sys, json
 import time
 from control import get_output_num
+from dotenv import load_dotenv
 GPIO.setmode(GPIO.BCM)
 
 env_dir = "/home/pi/device_var.env"
