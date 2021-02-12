@@ -1,8 +1,3 @@
-import temperature
-import humidity
-import uv
-import moisture
-
 def pin_handling(variable_name):
     if variable_name == "temperature" or variable_name == "humidity":
         pin = 17
