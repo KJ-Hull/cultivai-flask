@@ -1,3 +1,5 @@
+version = "0.1.1"
+
 import boto3, botocore
 import uuid
 import time

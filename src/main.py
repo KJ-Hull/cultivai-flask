@@ -1,3 +1,5 @@
+version = "0.1.1"
+
 import json
 import requests
 from dotenv import load_dotenv
@@ -5,7 +7,6 @@ import os
 import ssl
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 #from aws import check_bucket, create_bucket, s3_aws_init, upload_file, create_json_file 
-
 import RPi.GPIO as GPIO
 import requests
 from datetime import timedelta, datetime

@@ -1,3 +1,5 @@
+version = "0.1.1"
+
 def pin_handling(variable_name):
     if variable_name == "temperature" or variable_name == "humidity":
         pin = 17
