@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import json
+from control import pin_handling
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 from temperature import get_temperature
 from humidity import get_humidity
@@ -11,17 +12,6 @@ env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
 device_id = str(os.getenv("DEVICE_ID"))
 device_mqtt_client = ''
-
-def pin_handling(variable_name):
-    if variable_name == "temperature" or variable_name == "humidity":
-        pin = 17
-        return pin
-    if variable_name == "uv":
-        pin = 16
-        return pin
-    if variable_name == "moisture":
-        pin = 5
-        return pin
 
 def dev_publish_init(mqtt_client):
     global device_mqtt_client

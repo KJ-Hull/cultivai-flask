@@ -5,9 +5,8 @@ import subprocess
 import sys, json
 import time
 from dotenv import load_dotenv
-from request_handling import pin_handling
 import os
-from control import get_output_num
+from control import get_output_num, pin_handling
 
 GPIO.setmode(GPIO.BCM) 
 uv_pin = pin_handling("uv")

@@ -3,7 +3,6 @@ import RPi.GPIO as GPIO
 import subprocess
 import sys, json
 import time
-from request_handling import pin_handling
 from control import get_output_num
 GPIO.setmode(GPIO.BCM)
 
