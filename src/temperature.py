@@ -1,4 +1,3 @@
-
 version = "0.1.0"
 import RPi.GPIO as GPIO
 import subprocess

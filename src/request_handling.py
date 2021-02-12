@@ -2,10 +2,10 @@ from dotenv import load_dotenv
 import os
 import json
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-import temperature
-import moisture
-import humidity
-import uv
+from temperature import get_temperature
+from humidity import get_humidity
+from moisture import get_moisture
+from uv import get_uv
 
 env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
