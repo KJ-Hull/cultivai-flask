@@ -5,6 +5,7 @@ import subprocess
 import sys, json
 from dotenv import load_dotenv
 import time
+import os
 from control import get_output_num
 
 GPIO.setmode(GPIO.BCM)

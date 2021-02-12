@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import subprocess
 import sys, json
 import time
+import os
 from control import get_output_num
 from dotenv import load_dotenv
 GPIO.setmode(GPIO.BCM)
