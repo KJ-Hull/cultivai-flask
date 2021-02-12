@@ -1,14 +1,16 @@
-import requests
 from dotenv import load_dotenv
 import os
 import json
 from control import get_humid, get_temperature, get_humidity, get_moisture, get_uv, post_schedule
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+import temperature
+import moisture
+import humidity
+import uv
 
 env_dir = "/home/pi/device_var.env"
-temp_hum_pin = 17
-moisture_pin = 5
-uv_pin = 16
+load_dotenv(env_dir)
+device_id = str(os.getenv("DEVICE_ID"))
 device_mqtt_client = ''
 
 def pin_handling(variable_name):
@@ -27,9 +29,8 @@ def dev_publish_init(mqtt_client):
     device_mqtt_client = mqtt_client
 
 def mqtt_meas(meas_json, action_type):
+    global device_id
     client = device_mqtt_client
-    load_dotenv(env_dir)
-    device_id = str(os.getenv("DEVICE_ID"))
     topic = device_id + '/Post/' + action_type
     print(topic)
     data_json = json.loads(meas_json)
@@ -43,14 +44,8 @@ def payload_handling(payload):
     print(received_dev_id)
     received_variable = str(json_action["variable"])
     print(received_variable)
-    pin = 17
-    if received_variable == "temperature" or received_variable == "humidity":
-        pin = 17
-    if received_variable == "uv":
-        pin = 16
-    if received_variable == "moisture":
-        pin = 5
-
+    pin = pin_handling(received_variable)
+    print(pin)
     return action_type, received_dev_id, received_variable, pin
     
 
