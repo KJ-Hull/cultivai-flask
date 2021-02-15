@@ -45,7 +45,7 @@ def mqtt_pub(meas_json, action_type):
         data_json = json.loads(meas_json)
         client.publish(topic, json.dumps(data_json), 0)
     if action_type == "update":
-        status = download_file(meas_json)
+        dev_status = download_file(meas_json)
         if dev_status == "Active":
             status = dev_status
             status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
