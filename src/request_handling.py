@@ -39,7 +39,7 @@ def mqtt_pub(meas_json, action_type):
     print(topic)
     active, status, version = status_handling(action_type)
     status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
-    status_json = json.loads(status_dict)
+    status_json = json.dumps(status_dict)
     if action_type == "measurement":
         data_json = json.loads(meas_json)
         client.publish(topic, json.dumps(data_json), 0)
