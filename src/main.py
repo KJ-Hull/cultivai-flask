@@ -112,10 +112,10 @@ while True:
             rpi_mqtt_client.subscribe(MQTT_TOPIC, 1, customPostCallback)
         else:
             print("Error in subscribing to " + MQTT_TOPIC + ". Please try again later.")
+            os.system("python3 main.py")
             print("Rebooting Device")
-            os.execv('/home/pi/cultivai-flask/src/main.py', ['True'])
             attempts_master = 3
-          
+            exit()
     try:
         rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
         print("Subscribed to Master")
@@ -125,10 +125,10 @@ while True:
             rpi_mqtt_client.subscribe('Master', 1, customMasterCallback)
         else:
              print("Error in subscribing to Master. Please try again later.")
+             os.system("python3 main.py")
              print("Rebooting Device")
-             os.execv('/home/pi/cultivai-flask/src/main.py', ['True'])
              attempts_master = 3
-             
+             exit()
 
 # s3_aws_init(209, "temp", get_temperature())
    
