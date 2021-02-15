@@ -65,7 +65,8 @@ def customMasterCallback(client, userdata, msg):
                 pin = pin_handling("moisture")
                 MQTT_action(action_type, "moisture", received_dev_id, pin)
             if action_type == "update":
-                MQTT_action(action_type, "", received_dev_id, "")
+                file = json_msg["file_name"]
+                MQTT_action(action_type, file, received_dev_id, "")
             
         except:
             if attempts != 0:

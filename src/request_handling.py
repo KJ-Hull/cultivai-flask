@@ -8,7 +8,7 @@ from temperature import get_temperature
 from humidity import get_humidity
 from moisture import get_moisture
 from uv import get_uv
-
+from aws import download_file
 env_dir = "/home/pi/device_var.env"
 load_dotenv(env_dir)
 device_id = str(os.getenv("DEVICE_ID"))
@@ -40,11 +40,22 @@ def mqtt_pub(meas_json, action_type):
     active, status, version = status_handling(action_type)
     status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
     status_json = json.dumps(status_dict)
+    client.publish(status_change, status_json, 0)
     if action_type == "measurement":
         data_json = json.loads(meas_json)
         client.publish(topic, json.dumps(data_json), 0)
-
-    client.publish(status_change, status_json, 0)
+    if action_type == "update":
+        status = download_file(meas_json)
+        if dev_status == "Active":
+            status = dev_status
+            status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
+            status_json = json.dumps(status_dict)
+            client.publish(status_change, status_json, 0)
+        else:
+            status = dev_status
+            status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
+            status_json = json.dumps(status_dict)
+            client.publish(status_change, status_json, 0)
 
 def payload_handling(payload):
     json_action = json.loads(payload)
@@ -87,7 +98,7 @@ def MQTT_action(action_type, received_variable, received_dev_id, pin):
             received_dev_id = ''
 
     if action_type == "update":
-        mqtt_pub("", action_type)
+        mqtt_pub(received_variable, action_type)
 
     #if action_type == "PinState":
 

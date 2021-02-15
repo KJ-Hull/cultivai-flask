@@ -11,7 +11,6 @@ def pin_handling(variable_name):
         pin = 5
         return pin
 
-
 def get_output_num(variable_name):
     if variable_name == "temperature":
         return "output_1"
@@ -21,6 +20,7 @@ def get_output_num(variable_name):
         return "output_3"
     if variable_name == "uv":
         return "output_4"
+
 
 
     

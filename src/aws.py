@@ -8,8 +8,9 @@ import os.path
 from os import path
 s3_resource = boto3.resource('s3')
 
-bucket_name = 'cultivtest-bucket2'
+bucket_name = 'cultivaisoftware'
 file_name = ''
+
 
 def check_bucket(bucket_name):
     try:
@@ -23,6 +24,19 @@ def check_bucket(bucket_name):
         elif error_code == 404:
             print("Bucket Does Not Exist!")
             return True, error_code
+
+def download_file(file_name):
+    global bucket_name
+    status, status_code = check_bucket(bucket_name)
+    if status == True and status_code == 0:
+        s3 = boto3.resource('s3')
+        output = f"/home/pi/downloads/{file_name}"
+        s3.Bucket(bucket_name).download_file(file_name, output)
+        dev_state = "Active"
+        return dev_state
+    else:
+        dev_state = "Error"
+        return dev_state
 
 def create_bucket(bucket_name, s3_connection):
     error_code = 0
