@@ -87,7 +87,7 @@ def MQTT_action(action_type, received_variable, received_dev_id, pin):
             received_dev_id = ''
 
     if action_type == "update":
-        mqtt_pub("", action_update)
+        mqtt_pub("", action_type)
 
     #if action_type == "PinState":
 
