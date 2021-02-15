@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 version = "0.1.2"
 from dotenv import load_dotenv
