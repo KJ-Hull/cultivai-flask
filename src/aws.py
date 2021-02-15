@@ -26,6 +26,7 @@ def check_bucket(bucket_name):
             return True, error_code
 
 def download_file(file_name):
+    print(file_name)
     global bucket_name
     status, status_code = check_bucket(bucket_name)
     if status == True and status_code == 0:
