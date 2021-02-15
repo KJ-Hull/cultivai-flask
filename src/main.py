@@ -12,7 +12,7 @@ import requests
 from datetime import timedelta, datetime
 import uuid
 import time
-from request_handling import mqtt_meas, MQTT_action, payload_handling, dev_publish_init, pin_handling
+from request_handling import mqtt_pub, MQTT_action, payload_handling, dev_publish_init, pin_handling
 
 action_type = ''
 received_dev_id = ''
