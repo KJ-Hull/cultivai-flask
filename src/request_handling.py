@@ -54,7 +54,7 @@ def mqtt_pub(meas_json, action_type):
             status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
             status_json = json.dumps(status_dict)
             client.publish(status_change, status_json, 0)
-            os.execv('/home/pi/cultivai-flask/src/main.py', [''])
+            os.execv('/home/pi/cultivai-flask/src/main.py', '')
         else:
             status = dev_status
             status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
