@@ -18,13 +18,33 @@ def dev_publish_init(mqtt_client):
     global device_mqtt_client
     device_mqtt_client = mqtt_client
 
-def mqtt_meas(meas_json, action_type):
+def status_handling(action_type):
+    if action_type == "update":
+        active = True
+        status = "Updating"
+        version = "0.2"
+    else:
+        active = True
+        status = "Active"
+        version = "0.1"
+
+    return active, status, version
+
+def mqtt_pub(meas_json, action_type):
     global device_id
     client = device_mqtt_client
     topic = device_id + '/Post/' + action_type
+    status_change = device_id + '/Post/status'
+    print(status_change)
     print(topic)
-    data_json = json.loads(meas_json)
-    client.publish(topic, json.dumps(data_json), 0)
+    active, status, version = status_handling(action_type)
+    status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
+    status_json = json.loads(status_dict)
+    if action_type == "measurement":
+        data_json = json.loads(meas_json)
+        client.publish(topic, json.dumps(data_json), 0)
+
+    client.publish(status_change, json.dumps(status_json), 0)
 
 def payload_handling(payload):
     json_action = json.loads(payload)
@@ -42,35 +62,36 @@ def payload_handling(payload):
 def MQTT_action(action_type, received_variable, received_dev_id, pin):
     if action_type == "measurement":
         if received_variable == "temperature":
-            mqtt_meas(get_temperature(pin), action_type)
+            mqtt_pub(get_temperature(pin), action_type)
             print("Temperature Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "humidity":
-            mqtt_meas(get_humidity(pin), action_type)
+            mqtt_pub(get_humidity(pin), action_type)
             print("Humidity Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "moisture":
-            mqtt_meas(get_moisture(pin), action_type)
+            mqtt_pub(get_moisture(pin), action_type)
             print("Moisture Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
         if received_variable == "uv":
-            mqtt_meas(get_uv(pin), action_type)
+            mqtt_pub(get_uv(pin), action_type)
             print("UV Sent \n")
             action_type = ''
             received_variable = ''
             received_dev_id = ''
 
     if action_type == "update":
-        print("yes, master")
+        mqtt_pub("", action_update)
+
     #if action_type == "PinState":
 
-    #if action_type == "PortChane":
+    #if action_type == "PortChange":
 
 
 

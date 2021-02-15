@@ -14,12 +14,6 @@ import uuid
 import time
 from request_handling import mqtt_meas, MQTT_action, payload_handling, dev_publish_init, pin_handling
 
-temp_hum_pin = 17
-moisture_pin = 5
-uv_pin = 16
-
-measurement_id = ""
-
 action_type = ''
 received_dev_id = ''
 received_variable = ''
