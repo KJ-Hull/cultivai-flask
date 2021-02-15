@@ -44,7 +44,7 @@ def mqtt_pub(meas_json, action_type):
         data_json = json.loads(meas_json)
         client.publish(topic, json.dumps(data_json), 0)
 
-    client.publish(status_change, json.loads(status_json), 0)
+    client.publish(status_change, status_json, 0)
 
 def payload_handling(payload):
     json_action = json.loads(payload)
