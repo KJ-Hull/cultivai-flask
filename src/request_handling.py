@@ -1,4 +1,6 @@
-version = "0.1.1"
+#!/usr/bin/python3
+
+version = "0.1.2"
 from dotenv import load_dotenv
 import os
 import json
@@ -22,7 +24,7 @@ def status_handling(action_type):
     if action_type == "update":
         active = True
         status = "Updating"
-        version = "0.3"
+        version = "0.4"
     else:
         active = True
         status = "Active"
@@ -35,15 +37,16 @@ def mqtt_pub(meas_json, action_type):
     client = device_mqtt_client
     topic = device_id + '/Post/' + action_type
     status_change = device_id + '/Post/status'
-    print(status_change)
-    print(topic)
+
     active, status, version = status_handling(action_type)
     status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
     status_json = json.dumps(status_dict)
     client.publish(status_change, status_json, 0)
+
     if action_type == "measurement":
         data_json = json.loads(meas_json)
         client.publish(topic, json.dumps(data_json), 0)
+
     if action_type == "update":
         dev_status = download_file(meas_json)
         if dev_status == "Active":
@@ -51,6 +54,7 @@ def mqtt_pub(meas_json, action_type):
             status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
             status_json = json.dumps(status_dict)
             client.publish(status_change, status_json, 0)
+            os.execv('/home/pi/cultivai-flask/src/main.py', [''])
         else:
             status = dev_status
             status_dict = {"active":active, "status":status, "version":version, "device_id":device_id}
