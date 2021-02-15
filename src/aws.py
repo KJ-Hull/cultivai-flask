@@ -29,9 +29,9 @@ def download_file(file_name):
     global bucket_name
     status, status_code = check_bucket(bucket_name)
     if status == True and status_code == 0:
-        s3 = boto3.resource('s3')
         output = f"/home/pi/downloads/{file_name}"
-        s3.Bucket(bucket_name).download_file(file_name)
+        s3 = boto3.client('s3')
+        s3.download_file(bucket_name, file_name, file_name)
         dev_state = "Active"
         return dev_state
     else:
