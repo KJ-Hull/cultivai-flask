@@ -22,7 +22,7 @@ def status_handling(action_type):
     if action_type == "update":
         active = True
         status = "Updating"
-        version = "0.2"
+        version = "0.3"
     else:
         active = True
         status = "Active"
